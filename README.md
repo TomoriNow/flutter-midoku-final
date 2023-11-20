@@ -1,4 +1,4 @@
-### Group Members
+## Group Members
 <hr>
 
 * Alvin Zhafif Afilla (2206046632)
@@ -7,15 +7,15 @@
 * Galih Ibrahim Kurniawan (2206046696)
 * Muhammad Sakhran Thayyib / Duden (2206046790)
 
-### Link to the APK
+## Link to the APK
 <hr>
 
 Temporarily blank until stage 2 is done
 
-### Application description (name and function of the application).
+## Application description (name and function of the application).
 <hr>
 
-#### Midoku’s Story and Benefits
+### Midoku’s Story and Benefits
 
 Keeping track of your reading progress can be a persistent challenge when delving into the world of books, especially in today’s digital age. This issue becomes even more pronounced with online books, manga, manhwa, and light novels, as they often receive sporadic updates, sometimes with significant gaps between new chapters. When you find yourself engrossed in multiple forms of literature simultaneously, it’s all too easy for your reading experiences to blur together, leaving you uncertain about what you’ve already perused.
 <br>
@@ -40,7 +40,7 @@ Apart from your usual manga-reading sites, our site provides you with your very 
 <br>
 Made by you, and made for you.
 
-#### List of implemented modules with the distribution of work per member.
+### List of implemented modules with the distribution of work per member.
 <hr>
 
 List of feature implementation:
@@ -61,7 +61,7 @@ List of feature implementation:
 * Muhammad Sakhran Thayyib / Duden: Search Page
 <br>
 
-#### User roles or actors in the application
+### User roles or actors in the application
 <hr>
 
 Owner/Superuser - The Owner (or the Superuser) in our web application has the ability add and remove admins. The Owner/Superuser is also able to perform all the operations that admins and user can do.
@@ -70,11 +70,11 @@ Admin - The Admin is capable of accepting or rejecting tag (such as adding tags)
 <br>
 User - The User is able to add books to their own list (which can be from the catalog or they can add all of the details of the book that they have read themselves), share their lists to other users, as well as add reviews and edit the last-read attribute to books in their list. They can also submit possible book tags or books for the catalog that the admins can accept or deny before adding them to the web application for other users to see publicly.
 
-#### Integration flow with the web service to connect to the web application created during the Midterm Project.
+### Integration flow with the web service to connect to the web application created during the Midterm Project.
 <hr>
 
 
-#### Link to the report documents/sheets.
+### Link to the report documents/sheets.
 <hr>
 
 https://docs.google.com/spreadsheets/d/1qj96wXAVZJGXg9jvsCb3iM_aPbRxxIprww1FheIdtSo/edit#gid=0

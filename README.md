@@ -41,6 +41,7 @@ Apart from your usual manga-reading sites, our site provides you with your very 
 Made by you, and made for you.
 
 #### List of implemented modules with the distribution of work per member.
+<hr>
 
 List of feature implementation:
 <br>
@@ -51,10 +52,12 @@ List of feature implementation:
 * Galih: Book entries Page
 <br>
 
-* Alvin: register&login
+* Alvin: register & login
 <br>
 
-* Sam: User Display Page
+* Sam: User Display Page
+<br>
 
-* Duden: Search Page
+* Duden: Search Page
+<br>
 

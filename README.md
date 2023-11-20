@@ -3,7 +3,7 @@
 
 * Alvin Zhafif Afilla (2206046632)
 * Muhammad Sean Arsha Galant (2206822963)
-* Gregorius Samuel Hutahean ()
+* Gregorius Samuel Hutahean (2206046701)
 * Galih Ibrahim Kurniawan (2206046696)
 * Muhammad Sakhran Thayyib / Duden (2206046790)
 

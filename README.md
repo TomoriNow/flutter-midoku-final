@@ -5,7 +5,7 @@
 * Muhammad Sean Arsha Galant (2206822963)
 * Gregorius Samuel Hutahean ()
 * Galih Ibrahim Kurniawan (2206046696)
-* Muhammad Sakhran Thayyib (2206046790)
+* Muhammad Sakhran Thayyib / Duden (2206046790)
 
 ### Link to the APK
 <hr>
@@ -46,18 +46,36 @@ Made by you, and made for you.
 List of feature implementation:
 <br>
 
-* Sean: Catalogue Page
+* Muhammad Sean Arsha Galant: Catalogue Page
 <br>
 
-* Galih: Book entries Page
+* Galih Ibrahim Kurniawan: Book entries Page
 <br>
 
-* Alvin: register & login
+* Alvin Zhafif Afilla: register & login
 <br>
 
-* Sam: User Display Page
+* Gregorius Samuel Hutahean: User Display Page
 <br>
 
-* Duden: Search Page
+* Muhammad Sakhran Thayyib / Duden: Search Page
 <br>
+
+#### User roles or actors in the application
+<hr>
+
+Owner/Superuser - The Owner (or the Superuser) in our web application has the ability add and remove admins. The Owner/Superuser is also able to perform all the operations that admins and user can do.
+<br>
+Admin - The Admin is capable of accepting or rejecting tag (such as adding tags) and book (such as adding books to the catalog) requests. However, the admin is not capable of adding more admins into the web application.
+<br>
+User - The User is able to add books to their own list (which can be from the catalog or they can add all of the details of the book that they have read themselves), share their lists to other users, as well as add reviews and edit the last-read attribute to books in their list. They can also submit possible book tags or books for the catalog that the admins can accept or deny before adding them to the web application for other users to see publicly.
+
+#### Integration flow with the web service to connect to the web application created during the Midterm Project.
+<hr>
+
+
+#### Link to the report documents/sheets.
+<hr>
+
+https://docs.google.com/spreadsheets/d/1qj96wXAVZJGXg9jvsCb3iM_aPbRxxIprww1FheIdtSo/edit#gid=0
 

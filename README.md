@@ -46,10 +46,10 @@ Made by you, and made for you.
 List of feature implementation:
 <br>
 
-* Muhammad Sean Arsha Galant: Catalogue Page
+* Muhammad Sean Arsha Galant: Catalogue Page, Admin Page(with Duden)
 <br>
 
-* Galih Ibrahim Kurniawan: Book entries Page
+* Galih Ibrahim Kurniawan: Book entries Page, Other User Collection 
 <br>
 
 * Alvin Zhafif Afilla: register & login
@@ -58,9 +58,9 @@ List of feature implementation:
 * Gregorius Samuel Hutahean: User Display Page
 <br>
 
-* Muhammad Sakhran Thayyib / Duden: Search Page
+* Muhammad Sakhran Thayyib / Duden: Search Page, Admin Page(with Seam)
 <br>
-
+**Note:** Our group members may help/work on pages/modules/functions outside of what they have been assigned to, in which case their contribution will be acknowledged during presentation/an update to the README after stage 1
 ### User roles or actors in the application
 <hr>
 
@@ -72,6 +72,7 @@ User - The User is able to add books to their own list (which can be from the ca
 
 ### Integration flow with the web service to connect to the web application created during the Midterm Project.
 <hr>
+We will be utilising the Provider and the pbp_django_auth packages to facilitate transfer of data between our flutter app(Final Project) with our Django project(Midterm Project). Specifically, we will use the CookieRequest.get method to fetch data from our Django database, the CookieRequest.post method for registration to save instances of BookEntries, TagPosts, BookPosts, etc. to our Django database and the CookieRequest.login method for authentication (such as logging in and saving the current user)
 
 
 ### Link to the report documents/sheets.

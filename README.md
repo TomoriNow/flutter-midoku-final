@@ -5,7 +5,7 @@
 * Muhammad Sean Arsha Galant (2206822963)
 * Gregorius Samuel Hutahean (2206046701)
 * Galih Ibrahim Kurniawan (2206046696)
-* Muhammad Sakhran Thayyib / Duden (2206046790)
+* Muhammad Sakhran Thayyib AKA Duden (2206046790)
 
 ## Link to the APK
 <hr>

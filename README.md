@@ -72,7 +72,7 @@ User - The User is able to add books to their own list (which can be from the ca
 
 ### Integration flow with the web service to connect to the web application created during the Midterm Project.
 <hr>
-We will be utilising the Provider and the pbp_django_auth packages to facilitate transfer of data between our flutter app(Final Project) with our Django project(Midterm Project). Specifically, we will use the CookieRequest.get method to fetch data from our Django database, the CookieRequest.post method for registration to save instances of BookEntries, TagPosts, BookPosts, etc. to our Django database and the CookieRequest.login method for authentication (such as logging in and saving the current user)
+We will be utilising the Provider and the pbp_django_auth packages to facilitate transfer of data between our flutter app(Final Project) with our Django project(Midterm Project). Specifically, we will use the CookieRequest.get method to fetch data from our Django database, the CookieRequest.post method for registration or to save instances of BookEntries, TagPosts, BookPosts, etc. to our Django database and the CookieRequest.login method for authentication (such as logging in and saving the current user)
 
 
 ### Link to the report documents/sheets.

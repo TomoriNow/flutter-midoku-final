@@ -58,7 +58,7 @@ List of feature implementation:
 * Gregorius Samuel Hutahean: User Display Page
 <br>
 
-* Muhammad Sakhran Thayyib / Duden: Search Page, Admin Page(with Seam)
+* Muhammad Sakhran Thayyib / Duden: Search Page, Admin Page(with Sean)
 <br>
 **Note:** Our group members may help/work on pages/modules/functions outside of what they have been assigned to, in which case their contribution will be acknowledged during presentation/an update to the README after stage 1
 ### User roles or actors in the application

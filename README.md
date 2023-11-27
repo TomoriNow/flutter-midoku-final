@@ -80,3 +80,7 @@ We will be utilising the Provider and the pbp_django_auth packages to facilitate
 
 https://docs.google.com/spreadsheets/d/1qj96wXAVZJGXg9jvsCb3iM_aPbRxxIprww1FheIdtSo/edit#gid=0
 
+### Link to Meeting Minutes
+<hr>
+https://docs.google.com/document/d/1imXNmesgl2c_y6nTBjoqEtfVuPo_Bwlwjfar6pO7UQ4/edit?usp=sharing
+

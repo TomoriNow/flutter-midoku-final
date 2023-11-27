@@ -49,7 +49,7 @@ List of feature implementation:
 * Muhammad Sean Arsha Galant: Catalogue Page, Admin Page(with Duden)
 <br>
 
-* Galih Ibrahim Kurniawan: Book entries Page, Other User Collection 
+* Galih Ibrahim Kurniawan: Book entries Page, Other User Collection Page, Add Catalog Entry Function, Add Custom Entry Function 
 <br>
 
 * Alvin Zhafif Afilla: register & login

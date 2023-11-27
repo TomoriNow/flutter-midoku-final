@@ -42,8 +42,39 @@ Made by you, and made for you.
 
 ### List of implemented modules with the distribution of work per member.
 __________________
+Pages and Important widgets to be implemented:
 
-List of feature implementation:
+**Login Page:** The page that the user will be routed to when they access the application. They will input their login details on this page, which will then be sent to the Django project, where the user is authenticated and logged in. Users can also access the Registration Page from here
+
+
+**Registration Page:** This is where users can register to the application, by filling in their desired username, desired password and their password confirmation. This information will be sent to the Django project using request.post, in which the backend will determine if the new user is valid (no one has that username yet and the password is secure) and will accept or reject the registration accordingly
+
+
+**Catalog Page:** This is where all of the books in our catalogue will be shown and where the user is navigated to when they log in. Users can also view further details about any book on the catalogue by tapping on it, and also there will be an option when you click on the book you will add it to your personal collection in the collection page.
+
+
+**Collection Page:** Where the user can view all of the book entries that they have added from the catalogue or they made a custom entry for. Users can view further detail regarding any book entry (such as any notes that they have written down regarding the bok, their rating, their review etc.) by tapping on them. Users can also, set their favourite entry, edit entries and access the create custom entry page from here. 
+
+
+**Add Catalog Entry Page:** Users may add entries from the catalog page, in which case they will be navigated to this page, which will display the information regarding the book (title, author, image, description) along with a few input fields to input information regarding the entry (last chapter read, rating, review, notes)
+
+
+**Add Custom Entry:** In this page users can add entries for books not found in the Catalogue page, here they have to fill out the details regarding the book (title, author, description, image link, tags) as well as the entry details (last chapter read, notes, review, rating). This data will be sent to the Django project, and if the data is valid then a BookEntry with that data will be created
+
+
+**Other User Collection Page:** Similar to the collection page, but instead of showing the entries of the user that is logged in, it shows the collection of a different user. Users can only view the entries and add any entries they like from this other user’s collection to their own collection. They can’t edit entries nor set any entries as favourite, however admins (superusers and staff) may be able to delete entries if they deem that that entry is inappropriate (will mostly occur if users add an inappropriate custom entry).
+
+
+**User List Page:** This where the user can view other users that are registered to the app, the user then can check out other user’s collection from here, thus rerouting the user to the Other User Collection Page
+
+
+**Admin Page:** In the Admin Page, Admins can view other users collections, make other users as admin, delete other users from the application/database, as well as approve or reject Bookpost and Tag suggestions from users (that will be added to the database and appear in the catalog page when approved)
+
+
+**Search Title Page:** The user can also search the catalog based on the title they want, the user will then be redirected into a new page with the books filtered based on what they had searched. If what they have searched does not exist then a notice with a blank page will be shown.
+
+
+Distribution of Work:
 
 
 * Muhammad Sean Arsha Galant: Catalogue Page, Admin Page(with Duden)

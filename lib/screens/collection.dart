@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:midoku/models/book_entry.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:midoku/widgets/left_drawer.dart';
 
 class CollectionPage extends StatefulWidget {
     const CollectionPage({Key? key}) : super(key: key);
@@ -32,8 +33,11 @@ class _CollectionPageState extends State<CollectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Item'),
+        title: const Text('Collection Page'),
+        backgroundColor: Colors.greenAccent,
+        foregroundColor: Colors.white,
       ),
+      drawer: const LeftDrawer(),
       body: FutureBuilder(
         future: fetchItem(),
         builder: (context, AsyncSnapshot<List<BookEntry>> snapshot) {

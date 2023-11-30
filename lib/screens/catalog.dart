@@ -4,6 +4,8 @@ import 'package:midoku/main.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/book.dart';
+import 'package:midoku/widgets/left_drawer.dart';
+
 
 class CatalogPage extends StatefulWidget {
     const CatalogPage({Key? key}) : super(key: key);
@@ -37,6 +39,7 @@ class _CatalogPageState extends State<CatalogPage> {
         backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
       ),
+      drawer: const LeftDrawer(),
       body: FutureBuilder(
         future: fetchItem(),
         builder: (context, AsyncSnapshot<List<Book>> snapshot) {

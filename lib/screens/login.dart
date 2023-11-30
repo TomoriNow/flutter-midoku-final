@@ -1,10 +1,11 @@
 // import 'package:shopping_list/screens/menu.dart';
 import 'package:flutter/material.dart';
-import 'package:midoku/catalog.dart';
+import 'package:midoku/screens/catalog.dart';
 import 'package:midoku/main.dart';
 import 'package:midoku/screens/register.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:midoku/screens/collection.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -122,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                       String uname = response['username'];
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                        MaterialPageRoute(builder: (context) => CatalogPage()),
                       );
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()

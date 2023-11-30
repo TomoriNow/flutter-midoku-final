@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:midoku/catalog.dart';
+import 'package:midoku/screens/catalog.dart';
 import 'package:midoku/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';

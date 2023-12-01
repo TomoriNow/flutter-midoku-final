@@ -18,21 +18,13 @@ class AddCatalogPage extends StatefulWidget {
 
 class _AddCatalogPageState extends State<AddCatalogPage> {
   final _formKey = GlobalKey<FormState>();
-  String _name = "";
-  String _author = "";
-  String _imagelink = "";
-  List<String> _taggits = [];
   int _lastChapterRead = 0;
   String _review = "";
   int _rating = 0;
   String _notes = ""; 
-  String _description = "";
-  List<String> tags = [];
-  String? _type;
   String? _status; 
   
   List<String> statuses = ["Plan to read", "Reading", "On Hold", "Dropped", "Finished"];
-  List<String> types = ["Manga", "Manhwa", "Novel", "Light Novel"];
 
 
 
@@ -98,7 +90,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    widget.book.type.toString(),
+                    typeValues.reverse[widget.book.type]!,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,

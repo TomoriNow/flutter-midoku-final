@@ -91,7 +91,7 @@ class Book {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    type.toString(),
+                    typeValues.reverse[type]!,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,

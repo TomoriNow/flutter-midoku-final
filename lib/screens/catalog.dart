@@ -63,7 +63,7 @@ class _CatalogPageState extends State<CatalogPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final catalogBook = snapshot.data![index];
-                return catalogBook.buildCatalogWidget();
+                return catalogBook.buildCatalogWidget(context);
               },
             );
           }

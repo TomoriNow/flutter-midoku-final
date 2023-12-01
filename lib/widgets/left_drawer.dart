@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:midoku/screens/add_custom_entry.dart';
 import 'package:midoku/screens/catalog.dart';
 import 'package:midoku/screens/collection.dart';
 import 'package:midoku/screens/login.dart';
@@ -60,6 +61,17 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => const CollectionPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.checklist),
+            title: const Text('Add Custom Entry'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AddCustomPage(),
                 ),
               );
             },

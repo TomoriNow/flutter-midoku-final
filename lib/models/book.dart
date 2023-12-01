@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:midoku/screens/add_catalog_entry.dart';
 
 List<Book> bookFromJson(String str) => List<Book>.from(json.decode(str).map((x) => Book.fromJson(x)));
 
@@ -52,14 +53,15 @@ class Book {
         "tags": tags,
     };
     
-    Widget buildCatalogWidget() {
+    Widget buildCatalogWidget(BuildContext context) {
       return Card(
         margin: const EdgeInsets.symmetric(
           horizontal: 16, vertical: 12,
         ),
         elevation: 10,
-        child: InkWell(
-          child: Padding(
+        child: Stack(
+          children: [
+            Padding(
             padding: const EdgeInsets.all(20.0),
             child: SizedBox(
               height: 600, // Set the desired height for the card
@@ -131,6 +133,25 @@ class Book {
               ),
             ),
           ),
+          Positioned(
+            top: 8.0,
+            right: 8.0,
+            child: IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                // Handle icon button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                  builder: (context) =>
+                    AddCatalogPage(book: this),
+                  ),
+                );
+                print('Edit button pressed');
+              },
+            ),
+          ),
+          ]
         ),
       );
     }

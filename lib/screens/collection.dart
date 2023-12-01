@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midoku/models/book_entry.dart';
+import 'package:midoku/screens/add_custom_entry.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/widgets/left_drawer.dart';
@@ -44,16 +45,15 @@ class _CollectionPageState extends State<CollectionPage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {// Access the error information
-      var error = snapshot.error;
-      
-      // Handle the error condition
-      return Text('Error: $error');
+            var error = snapshot.error;
+            // Handle the error condition
+            return Text('Error: $error');
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No item data available.'));
+            return const Center(child: Text('You have no books in your collection.'));
           } else {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
               ),
@@ -66,6 +66,16 @@ class _CollectionPageState extends State<CollectionPage> {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddCustomPage()),
+          );
+        },
+        label: const Text('Add Custom Entry'),
+        icon: const Icon(Icons.add),
+      )
     );
   }
 }

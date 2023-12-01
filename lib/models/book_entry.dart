@@ -60,55 +60,59 @@ class BookEntry {
     Widget buildEntryWidget() {
       CustomEntry book = customEntry ?? catalogEntry!.book;
       return Card(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 16, vertical: 12
+        margin: const EdgeInsets.symmetric(
+          horizontal: 16, vertical: 12
+        ),
+        elevation: 10,
+        child: InkWell(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SizedBox(
+              height: 600,
+              child: ListView(
+                children: [
+                  Text(
+                    book.name,
+                    style: const TextStyle(
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  child: InkWell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: ListView(
-                        children: [
-                          Text(
-                            book.name,
-                            style: const TextStyle(
-                              fontSize: 23,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Image.network(
-                            book.imagelink, // Replace with your image URL
-                            width: 223, // Set the width of the image
-                            height: 500, // Set the height of the image
-                            fit: BoxFit.cover, // BoxFit property to control how the image should be inscribed into the box
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            "Rating: $rating",
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            "Description:",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            book.description,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                  Image.network(
+                    book.imagelink, // Replace with your image URL
+                    width: 250, // Set the width of the image
+                    height: 400, // Set the height of the image
+                    fit: BoxFit.contain, // BoxFit property to control how the image should be inscribed into the box
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "Rating: $rating",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Description:",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    book.description,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
                   )
-                );
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
     }
 }
 

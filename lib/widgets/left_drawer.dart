@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midoku/screens/add_custom_entry.dart';
+import 'package:midoku/screens/admin_page.dart';
 import 'package:midoku/screens/catalog.dart';
 import 'package:midoku/screens/collection.dart';
 import 'package:midoku/screens/login.dart';
@@ -72,6 +73,17 @@ class LeftDrawer extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const AddCustomPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.admin_panel_settings),
+            title: const Text('Admin Page'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AdminPage(),
                 ),
               );
             },

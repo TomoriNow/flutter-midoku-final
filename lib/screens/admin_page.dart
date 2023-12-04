@@ -59,7 +59,13 @@ class _AdminPageState extends State<AdminPage> {
                   label: Text('Show their Catalog'),
                 ),
                 DataColumn(
-                  label: Text('Modify User'),
+                  label: Text('Delete User'),
+                ),
+                DataColumn(
+                  label: Text('Make Admin'),
+                ),
+                DataColumn(
+                  label: Text('Revoke Admin'),
                 ),
               ],
               rows: snapshot.data!.map((user) {
@@ -73,6 +79,16 @@ class _AdminPageState extends State<AdminPage> {
                   DataCell(
                     ElevatedButton(  
                         child: const Text('Delete User'),  
+                        onPressed: () {}
+                    )),
+                    DataCell(
+                    ElevatedButton(  
+                        child: const Text('Make Admin'),  
+                        onPressed: () {}
+                    )),
+                    DataCell(
+                    ElevatedButton(  
+                        child: const Text('Revoke Admin'),  
                         onPressed: () {}
                     )),
                 ]);

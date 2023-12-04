@@ -3,6 +3,7 @@ import 'package:midoku/screens/add_custom_entry.dart';
 import 'package:midoku/screens/admin_page.dart';
 import 'package:midoku/screens/catalog.dart';
 import 'package:midoku/screens/collection.dart';
+import 'package:midoku/screens/filterbook.dart';
 import 'package:midoku/screens/login.dart';
 import 'package:midoku/screens/other_users.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -53,6 +54,18 @@ class LeftDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const CatalogPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.filter_alt),
+            title: const Text('Filter by tags'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FilterBookPage(),
                 ),
               );
             },

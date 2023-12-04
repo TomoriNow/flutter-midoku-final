@@ -147,7 +147,6 @@ class Book {
                     AddCatalogPage(book: this),
                   ),
                 );
-                print('Edit button pressed');
               },
             ),
           ),

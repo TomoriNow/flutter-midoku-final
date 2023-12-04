@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:midoku/screens/detailed_entry.dart';
 
 List<BookEntry> bookEntryFromJson(String str) => List<BookEntry>.from(json.decode(str).map((x) => BookEntry.fromJson(x)));
 
@@ -56,72 +57,6 @@ class BookEntry {
         "pk": pk,
         "notes": notes,
     };
-
-    Widget buildEntryWidget() {
-      CustomEntry book = customEntry ?? catalogEntry!.book;
-      return Card(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 16, vertical: 12
-        ),
-        elevation: 10,
-        child: InkWell(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: SizedBox(
-              height: 600,
-              child: ListView(
-                children: [
-                  Text(
-                    book.name,
-                    style: const TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Image.network(
-                    book.imagelink, // Replace with your image URL
-                    width: 250, // Set the width of the image
-                    height: 400, // Set the height of the image
-                    fit: BoxFit.contain, // BoxFit property to control how the image should be inscribed into the box
-                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                      return Image.asset(
-                  'assets/logos.png', // Replace with your image path
-                  width: 200.0, // Set the width of the image
-                  height: 100.0, // Set the height of the image
-                  fit: BoxFit.contain, // Adjust the BoxFit as needed
-                );
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "Rating: $rating",
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    "Description:",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    book.description,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    }
 }
 
 class CatalogEntry {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midoku/models/book_entry.dart';
 import 'package:midoku/screens/add_custom_entry.dart';
+import 'package:midoku/widgets/book_entry_card.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/widgets/left_drawer.dart';
@@ -60,18 +61,21 @@ class _CollectionPageState extends State<CollectionPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final bookEntry = snapshot.data![index];
-                return bookEntry.buildEntryWidget();
+                return BookEntryCard(bookEntry: bookEntry);
               },
             );
           }
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          final bool? shouldRefresh = await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const AddCustomPage()),
           );
+          if (shouldRefresh != null && shouldRefresh) {
+                  setState(() {});
+                }
         },
         label: const Text('Add Custom Entry'),
         icon: const Icon(Icons.add),

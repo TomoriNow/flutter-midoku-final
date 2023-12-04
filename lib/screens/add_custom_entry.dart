@@ -400,7 +400,7 @@ class _AddCustomPageState extends State<AddCustomPage> {
                           .showSnackBar(const SnackBar(
                             content: Text("New product has saved successfully!"),
                           ));
-                          Navigator.pop(context);
+                          Navigator.of(context).pop(true);
                         } else {
                           ScaffoldMessenger.of(context)
                           .showSnackBar(const SnackBar(

@@ -1,24 +1,34 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midoku/models/book.dart';
+import 'package:midoku/models/book_entry.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
-class AddCatalogPage extends StatefulWidget {
-    final Book book;
-    const AddCatalogPage({Key? key, required this.book}) : super(key: key);
+class DetailEntryPage extends StatefulWidget {
+    final BookEntry bookEntry;
+    const DetailEntryPage({Key? key, required this.bookEntry}) : super(key: key);
 
     @override
-    _AddCatalogPageState createState() => _AddCatalogPageState();
+    _DetailEntryPageState createState() => _DetailEntryPageState();
 }
 
-class _AddCatalogPageState extends State<AddCatalogPage> {
+class _DetailEntryPageState extends State<DetailEntryPage> {
   final _formKey = GlobalKey<FormState>();
-  int _lastChapterRead = 0;
-  String _review = "";
-  int _rating = 0;
-  String _notes = ""; 
   String? _status; 
+  TextEditingController _lastChapterController = TextEditingController();
+  TextEditingController _notesController = TextEditingController();
+  TextEditingController _reviewController = TextEditingController();
+  TextEditingController _ratingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _lastChapterController.text = widget.bookEntry.lastChapterRead.toString();
+    _notesController.text = widget.bookEntry.notes;
+    _reviewController.text = widget.bookEntry.review;
+    _ratingController.text = widget.bookEntry.rating.toString();
+  }
   
   List<String> statuses = ["Plan to read", "Reading", "On Hold", "Dropped", "Finished"];
 
@@ -26,12 +36,14 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
 
   @override
   Widget build(BuildContext context) {
+    _status = widget.bookEntry.status;
+    CustomEntry book = widget.bookEntry.customEntry ?? widget.bookEntry.catalogEntry!.book;
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Add Catalog Entry Form',
+            'Detailed Entry Page',
           ),
         ),
         backgroundColor: Colors.indigo,
@@ -48,7 +60,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.book.name,
+                    "Book title: ${book.name}",
                     style: const TextStyle(
                       fontSize: 23,
                       fontWeight: FontWeight.bold,
@@ -56,7 +68,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                   ),
                   const SizedBox(height: 10),
                   Image.network(
-                    widget.book.imagelink, // Replace with your image URL
+                    book.imagelink, // Replace with your image URL
                     width: 250, // Set the width of the image
                     height: 400, // Set the height of the image
                     fit: BoxFit.contain, // BoxFit property to control how the image should be inscribed into the box
@@ -71,7 +83,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    typeValues.reverse[widget.book.type]!,
+                    book.type,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
@@ -87,7 +99,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    widget.book.description,
+                    book.description,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
@@ -103,7 +115,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    widget.book.tags,
+                    book.taggits.toString(),
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
@@ -116,6 +128,13 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                    "Last Edit Date: ${widget.bookEntry.lastReadDate}",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DropdownButtonFormField<String>(
@@ -149,6 +168,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _lastChapterController,
                   decoration: InputDecoration(
                     hintText: "Last Chapter Read",
                     labelText: "Last Chapter Read",
@@ -156,11 +176,6 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _lastChapterRead = int.parse(value!);
-                    });
-                  },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return "Last Chapter Read cannot be empty!";
@@ -175,6 +190,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _notesController,
                   decoration: InputDecoration(
                     hintText: "Notes",
                     labelText: "Notes",
@@ -182,11 +198,6 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _notes = value!;
-                    });
-                  },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return "Notes cannot be empty!";
@@ -198,6 +209,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _reviewController,
                   decoration: InputDecoration(
                     hintText: "Review",
                     labelText: "Review",
@@ -205,11 +217,6 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _review = value!;
-                    });
-                  },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return "Review cannot be empty!";
@@ -221,6 +228,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  controller: _ratingController,
                   decoration: InputDecoration(
                     hintText: "Rating",
                     labelText: "Rating",
@@ -228,11 +236,6 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _rating = int.parse(value!);
-                    });
-                  },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return "Rating cannot be empty!";
@@ -258,24 +261,25 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        widget.bookEntry.rating = int.parse(_ratingController.text);
                         // Send request to Django and wait for the response
                         final response = await request.postJson(
-                          "http://127.0.0.1:8000/create-catalog-flutter/",
+                          "http://127.0.0.1:8000/edit-entry-flutter/",
                           jsonEncode(<String, dynamic>{
-                            'id': widget.book.id,
+                            'id': widget.bookEntry.pk,
                             'status': _status,
-                            'lastChapterRead' : _lastChapterRead,
-                            'notes': _notes,
-                            'review': _review,
-                            'rating': _rating
+                            'lastChapterRead' : _lastChapterController.text,
+                            'notes': _notesController.text,
+                            'review': _reviewController.text,
+                            'rating': _ratingController.text
                           })
                         );
                         if (response['status'] == 'success') {
                           ScaffoldMessenger.of(context)
                           .showSnackBar(const SnackBar(
-                            content: Text("New product has saved successfully!"),
+                            content: Text("Changes saved successfully!"),
                           ));
-                          Navigator.pop(context);
+                          Navigator.of(context).pop(true);
                         } else {
                           ScaffoldMessenger.of(context)
                           .showSnackBar(const SnackBar(

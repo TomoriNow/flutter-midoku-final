@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -17,12 +19,11 @@ class _AdminPageState extends State<AdminPage> {
       final request = context.watch<CookieRequest>();
       final response = await request.get('http://127.0.0.1:8000/other-users/');
 
-      // convert the JSON to Item object
       List<User> list_item = [];
       for (var d in response) {
-          if (d != null) {
-              list_item.add(User.fromJson(d));
-          }
+        if (d != null) {
+          list_item.add(User.fromJson(d));
+        }
       }
       return list_item;
   }
@@ -80,18 +81,25 @@ class _AdminPageState extends State<AdminPage> {
                   ElevatedButton( 
                     child: const Text('Delete User'),  
                     onPressed: () async {
-                      print(user.fields.username);
                       final response = await request.post('http://127.0.0.1:8000/delete_user_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AdminPage()),
+                      );
                     }
                   )
                 ),
               ];
-              if (user.fields.isStaff==false && user.fields.isSuperuser) {
+              if (user.fields.isStaff==false) {
                 cells.add (DataCell(
                     ElevatedButton(  
                       child: const Text('Make Admin'),  
                       onPressed: () async {
                         final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AdminPage()),
+                        );
                       }
                     )
                   )
@@ -100,13 +108,17 @@ class _AdminPageState extends State<AdminPage> {
                 cells.add(const DataCell(Text('Already an admin')));
               }
 
-              if (user.fields.isStaff && user.fields.isSuperuser == true) {
+              if (user.fields.isStaff==true) {
                 cells.add(
                   DataCell(
                     ElevatedButton(  
                       child: const Text('Revoke Admin'),  
                       onPressed: () async {
-                        final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
+                        final response = await request.post('http://127.0.0.1:8000/revoke_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const AdminPage()),
+                        );
                       }
                     ),
                   ),
@@ -121,7 +133,7 @@ class _AdminPageState extends State<AdminPage> {
                 border: Border.all(color: Colors.green),
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              columnSpacing: 100.0, // Adjust column spacing
+              columnSpacing: 80.0, // Adjust column spacing
             );
 
             return Center(

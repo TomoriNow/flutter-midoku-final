@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:midoku/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -13,10 +15,12 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _password1Controller = TextEditingController();
+  final TextEditingController _password2Controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),
@@ -71,9 +75,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 12.0),
                 TextField(
-                  controller: _passwordController,
+                  controller: _password1Controller,
                   decoration: InputDecoration(
                     labelText: 'Password',
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(20.0), // Set oval-like shape
+                    ),
+                  ),
+                  obscureText: true,
+                ),
+                const SizedBox(height: 12.0),
+                TextField(
+                  controller: _password2Controller,
+                  decoration: InputDecoration(
+                    labelText: 'Confirm Password',
                     border: OutlineInputBorder(
                       borderRadius:
                           BorderRadius.circular(20.0), // Set oval-like shape
@@ -85,35 +101,35 @@ class _RegisterPageState extends State<RegisterPage> {
                 ElevatedButton(
                   onPressed: () async {
                     String username = _usernameController.text;
-                    String password = _passwordController.text;
+                    String password1 = _password1Controller.text;
+                    String password2 = _password2Controller.text;
 
-                    final response = await http.post(
-                      Uri.parse("http://127.0.0.1:8000/auth/register/"),
-                      body: {
-                        'username': username,
-                        'password': password,
-                      },
+                    final response = await request.postJson("http://127.0.0.1:8000/auth/register/", 
+                    jsonEncode(<String, String>{
+                      'username': username,
+                      'password1': password1,
+                      'password2': password2,
+                      })
                     );
 
-                    if (response.statusCode == 200) {
+                    if (response['status']) {
                       // Handle successful registration
                       // You can parse the response body if needed
                       String message = "Registration successful!";
                       String uname = username;
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
-                      );
                       ScaffoldMessenger.of(context)
                         ..hideCurrentSnackBar()
                         ..showSnackBar(
                           SnackBar(content: Text("$message Welcome, $uname.")),
                         );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
+                      );
                     } else {
                       // Handle registration failure
-                      String errorMessage =
-                          jsonDecode(response.body)['message'];
+                      String errorMessage = response['message'];
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(

@@ -1,21 +1,22 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/user.dart';
-
+import 'package:midoku/screens/other_users_collection.dart';
 class Other_userPage extends StatefulWidget {
   const Other_userPage({Key? key}) : super(key: key);
-
   @override
-  _AdminPageState createState() => _AdminPageState();
+  _OtherUserPageState createState() => _OtherUserPageState();
 }
 
-class _AdminPageState extends State<Other_userPage> {
-  Future<List<User>> fetchItem() async {
+class _OtherUserPageState extends State<Other_userPage> {
+  @override
+  Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+    Future<List<User>> fetchItem() async {
     final response = await request.get('http://127.0.0.1:8000/other-users/');
-
     // convert the JSON to Item object
     List<User> list_item = [];
     for (var d in response) {
@@ -25,13 +26,10 @@ class _AdminPageState extends State<Other_userPage> {
     }
     return list_item;
   }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Admin Page',
+            'Other User Page',
           ),
           backgroundColor: Colors.greenAccent,
           foregroundColor: Colors.white,
@@ -66,7 +64,12 @@ class _AdminPageState extends State<Other_userPage> {
                       DataCell(Text(user.fields.username)),
                       DataCell(ElevatedButton(  
                         child: Text("Show ${user.fields.username}'s Catalog"),  
-                        onPressed: () {}
+                        onPressed: () {
+                        String theUsername = user.fields.username;
+                     Navigator.pushReplacement(
+                        context, MaterialPageRoute(builder: (context) => OtherUserCollectionPage(username: theUsername)),
+                    );
+                        }
                     )), // Replace with actual widget
                     ]);
                   }).toList(),

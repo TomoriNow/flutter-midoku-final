@@ -28,6 +28,7 @@ class _AdminPageState extends State<AdminPage> {
   }
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -79,19 +80,18 @@ class _AdminPageState extends State<AdminPage> {
                   ElevatedButton( 
                     child: const Text('Delete User'),  
                     onPressed: () async {
-                      final request = context.watch<CookieRequest>();
-                      final response = await request.post('http://127.0.0.1:8000/delete_user_flutter/${Uri.encodeComponent(user.fields.username)}', {"status": "success"});
+                      print(user.fields.username);
+                      final response = await request.post('http://127.0.0.1:8000/delete_user_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
                     }
                   )
                 ),
               ];
-              if (user.fields.isStaff & user.fields.isSuperuser == false) {
+              if (user.fields.isStaff==false && user.fields.isSuperuser) {
                 cells.add (DataCell(
                     ElevatedButton(  
                       child: const Text('Make Admin'),  
                       onPressed: () async {
-                        final request = context.watch<CookieRequest>();
-                        final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}', {"status": "success"});
+                        final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
                       }
                     )
                   )
@@ -100,14 +100,13 @@ class _AdminPageState extends State<AdminPage> {
                 cells.add(const DataCell(Text('Already an admin')));
               }
 
-              if (user.fields.isStaff && user.fields.isSuperuser) {
+              if (user.fields.isStaff && user.fields.isSuperuser == true) {
                 cells.add(
                   DataCell(
                     ElevatedButton(  
                       child: const Text('Revoke Admin'),  
                       onPressed: () async {
-                        final request = context.watch<CookieRequest>();
-                        final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}', {"status": "success"});
+                        final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
                       }
                     ),
                   ),

@@ -46,7 +46,7 @@ class _DetailEntryPageState extends State<DetailEntryPage> {
             'Detailed Entry Page',
           ),
         ),
-        backgroundColor: Colors.indigo,
+        backgroundColor: Colors.amberAccent,
         foregroundColor: Colors.white,
       ),
       body: Form(
@@ -72,6 +72,14 @@ class _DetailEntryPageState extends State<DetailEntryPage> {
                     width: 250, // Set the width of the image
                     height: 400, // Set the height of the image
                     fit: BoxFit.contain, // BoxFit property to control how the image should be inscribed into the box
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        return Image.asset(
+                          'assets/logos.png',
+                          width: 200.0,
+                          height: 100.0,
+                          fit: BoxFit.contain,
+                        );
+                      },
                   ),
                   const SizedBox(height: 20),
                   const Text(

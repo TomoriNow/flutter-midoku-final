@@ -70,18 +70,6 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.checklist),
-            title: const Text('Add Custom Entry'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AddCustomPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.admin_panel_settings),
             title: const Text('Admin Page'),
             onTap: () {

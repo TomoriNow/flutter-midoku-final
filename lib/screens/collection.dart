@@ -36,7 +36,7 @@ class _CollectionPageState extends State<CollectionPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Collection Page'),
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
@@ -55,8 +55,9 @@ class _CollectionPageState extends State<CollectionPage> {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.7,
               ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {

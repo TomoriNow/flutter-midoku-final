@@ -4,6 +4,7 @@ import 'package:midoku/screens/admin_page.dart';
 import 'package:midoku/screens/catalog.dart';
 import 'package:midoku/screens/collection.dart';
 import 'package:midoku/screens/login.dart';
+import 'package:midoku/screens/other_users.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -50,7 +51,8 @@ class LeftDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const CatalogPage(),
+                MaterialPageRoute(
+                  builder: (context) => const CatalogPage(),
                 ),
               );
             },
@@ -61,7 +63,20 @@ class LeftDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const CollectionPage(),
+                MaterialPageRoute(
+                  builder: (context) => const CollectionPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.checklist),
+            title: const Text('Add Custom Entry'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AddCustomPage(),
                 ),
               );
             },
@@ -72,7 +87,20 @@ class LeftDrawer extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AdminPage(),
+                MaterialPageRoute(
+                  builder: (context) => const AdminPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.supervisor_account),
+            title: const Text('Other Users'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Other_userPage(),
                 ),
               );
             },
@@ -81,23 +109,23 @@ class LeftDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout),
             title: const Text('Logout'),
             onTap: () async {
-              final response = await request.logout(
-                "http://127.0.0.1:8000/auth/logout/");
-                String message = response["message"];
-                if (response['status']) {
-                  String uname = response["username"];
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("$message Good bye, $uname."),
-                  ));
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text("$message"),
-                  ));
-                }
+              final response =
+                  await request.logout("http://127.0.0.1:8000/auth/logout/");
+              String message = response["message"];
+              if (response['status']) {
+                String uname = response["username"];
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message Good bye, $uname."),
+                ));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("$message"),
+                ));
+              }
             },
           ),
         ],

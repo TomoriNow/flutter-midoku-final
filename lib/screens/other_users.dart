@@ -64,8 +64,10 @@ class _AdminPageState extends State<Other_userPage> {
                   rows: snapshot.data!.map((user) {
                     return DataRow(cells: [
                       DataCell(Text(user.fields.username)),
-                      DataCell(Text(
-                          'Show Catalog Button')), // Replace with actual widget
+                      DataCell(ElevatedButton(  
+                        child: Text("Show ${user.fields.username}'s Catalog"),  
+                        onPressed: () {}
+                    )), // Replace with actual widget
                     ]);
                   }).toList(),
                   decoration: BoxDecoration(

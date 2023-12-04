@@ -50,8 +50,6 @@ class _AdminPageState extends State<AdminPage> {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No User data available.'));
           } else {
-          final currentUser = snapshot.data!.last;
-          if (currentUser.fields.isStaff && currentUser.fields.isSuperuser) {
               final dataTable = DataTable(
               columns: const [
                 DataColumn(
@@ -92,37 +90,6 @@ class _AdminPageState extends State<AdminPage> {
                   child: dataTable,
                 ),
               );
-            } else {
-              final dataTable = DataTable(
-              columns: const [
-                DataColumn(
-                  label: Text('Username'),
-                ),
-                DataColumn(
-                  label: Text('Show their Catalog'),
-                ),
-              ],
-              rows: snapshot.data!.map((user) {
-                return DataRow(
-                  cells: [
-                  DataCell(Text(user.fields.username)),
-                  DataCell(Text('Show Catalog Button')), // Replace with actual widget
-                ]);
-              }).toList(),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.green),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              columnSpacing: 120.0, // Adjust column spacing
-            );
-
-            return Center(
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  child: dataTable,
-                ),
-              );
-            }
           }
         }
       )

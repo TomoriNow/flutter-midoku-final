@@ -3,7 +3,7 @@ import 'package:midoku/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/user.dart';
-
+import 'package:http/http.dart' as http;
 
 class AdminPage extends StatefulWidget {
     const AdminPage({Key? key}) : super(key: key);
@@ -76,9 +76,12 @@ class _AdminPageState extends State<AdminPage> {
                   onPressed: () {}
                 )),
                 DataCell(
-                  ElevatedButton(  
+                  ElevatedButton( 
                     child: const Text('Delete User'),  
-                    onPressed: () {}
+                    onPressed: () async {
+                      final request = context.watch<CookieRequest>();
+                      final response = await request.post('http://127.0.0.1:8000/delete_user_flutter/${Uri.encodeComponent(user.fields.username)}', {"status": "success"});
+                    }
                   )
                 ),
               ];
@@ -86,7 +89,10 @@ class _AdminPageState extends State<AdminPage> {
                 cells.add (DataCell(
                     ElevatedButton(  
                       child: const Text('Make Admin'),  
-                      onPressed: () {}
+                      onPressed: () async {
+                        final request = context.watch<CookieRequest>();
+                        final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}', {"status": "success"});
+                      }
                     )
                   )
                 );
@@ -99,7 +105,10 @@ class _AdminPageState extends State<AdminPage> {
                   DataCell(
                     ElevatedButton(  
                       child: const Text('Revoke Admin'),  
-                      onPressed: () {}
+                      onPressed: () async {
+                        final request = context.watch<CookieRequest>();
+                        final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}', {"status": "success"});
+                      }
                     ),
                   ),
                 );

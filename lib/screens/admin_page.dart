@@ -69,29 +69,45 @@ class _AdminPageState extends State<AdminPage> {
                 ),
               ],
               rows: snapshot.data!.map((user) {
-                return DataRow(
-                  cells: [
-                  DataCell(Text(user.fields.username)),
-                  DataCell(ElevatedButton(  
-                        child: Text("Show ${user.fields.username}'s Catalog"),  
-                        onPressed: () {}
-                    )), // Replace with actual widget
+                List<DataCell> cells = [
+                DataCell(Text(user.fields.username)),
+                DataCell(ElevatedButton(  
+                  child: Text("Show ${user.fields.username}'s Catalog"),  
+                  onPressed: () {}
+                )),
+                DataCell(
+                  ElevatedButton(  
+                    child: const Text('Delete User'),  
+                    onPressed: () {}
+                  )
+                ),
+              ];
+              if (user.fields.isStaff & user.fields.isSuperuser == false) {
+                cells.add (DataCell(
+                    ElevatedButton(  
+                      child: const Text('Make Admin'),  
+                      onPressed: () {}
+                    )
+                  )
+                );
+              } else {
+                cells.add(const DataCell(Text('Already an admin')));
+              }
+
+              if (user.fields.isStaff && user.fields.isSuperuser) {
+                cells.add(
                   DataCell(
                     ElevatedButton(  
-                        child: const Text('Delete User'),  
-                        onPressed: () {}
-                    )),
-                    DataCell(
-                    ElevatedButton(  
-                        child: const Text('Make Admin'),  
-                        onPressed: () {}
-                    )),
-                    DataCell(
-                    ElevatedButton(  
-                        child: const Text('Revoke Admin'),  
-                        onPressed: () {}
-                    )),
-                ]);
+                      child: const Text('Revoke Admin'),  
+                      onPressed: () {}
+                    ),
+                  ),
+                );
+              } else {
+                cells.add(const DataCell(Text('Not an admin')));
+              }
+
+              return DataRow(cells: cells);
               }).toList(),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.green),

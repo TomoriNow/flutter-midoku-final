@@ -57,7 +57,7 @@ class _CollectionPageState extends State<CollectionPage> {
           } else {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 childAspectRatio: 0.7,
@@ -75,7 +75,7 @@ class _CollectionPageState extends State<CollectionPage> {
             child: Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.info),
+                  icon: const Icon(Icons.info),
                   onPressed: () async {
                     // Handle icon button press
                     final bool? shouldRefresh = await Navigator.push(

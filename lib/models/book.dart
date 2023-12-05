@@ -79,7 +79,7 @@ class Book {
                     imagelink, // Replace with your image URL
                     width: 250, // Set the width of the image
                     height: 400, // Set the height of the image
-                    fit: BoxFit.contain, // BoxFit property to control how the image should be inscribed into the box
+                    fit: BoxFit.fill, // BoxFit property to control how the image should be inscribed into the box
                   ),
                   const SizedBox(height: 20),
                   const Text(

@@ -59,9 +59,9 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
           } else {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+                crossAxisCount: 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
               ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {

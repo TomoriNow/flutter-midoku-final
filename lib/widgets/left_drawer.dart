@@ -81,18 +81,6 @@ class LeftDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.filter_alt),
-                  title: const Text('Filter by tags'),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const FilterBookPage(),
-                      ),
-                    );
-                  },
-                ),
-                ListTile(
                   leading: const Icon(Icons.checklist),
                   title: const Text('Collection Page'),
                   onTap: () {
@@ -101,16 +89,6 @@ class LeftDrawer extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => const CollectionPage(),
                       ),
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.search),
-                  title: const Text('Search'),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const SearchPage()),
                     );
                   },
                 ),

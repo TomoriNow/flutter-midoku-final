@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:midoku/screens/filterbook.dart';
 import 'package:midoku/screens/login.dart';
 import 'package:midoku/main.dart';
+import 'package:midoku/screens/searchPage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/book.dart';
@@ -68,6 +70,44 @@ class _CatalogPageState extends State<CatalogPage> {
             );
           }
         },
+      ),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            right: 16.0,
+            bottom: 16.0,
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FilterBookPage(),
+                  ),
+                );
+              },
+              heroTag: null,
+              label: const Text('Filter by tags'),
+              icon: const Icon(Icons.filter_alt),
+            ),
+          ),
+          Positioned(
+            right: 16.0,
+            bottom: 80.0,
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchPage(),
+                  ),
+                );
+              },
+              heroTag: null,
+              label: const Text('Search'),
+              icon: const Icon(Icons.search),
+            ),
+          ),
+        ],
       ),
     );
   }

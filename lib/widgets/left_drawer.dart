@@ -8,6 +8,7 @@ import 'package:midoku/screens/login.dart';
 import 'package:midoku/screens/other_users.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:midoku/screens/searchPage.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -79,6 +80,16 @@ class LeftDrawer extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => const CollectionPage(),
                 ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.search),
+            title: const Text('Search'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchPage()),
               );
             },
           ),

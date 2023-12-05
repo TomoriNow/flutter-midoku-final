@@ -3,6 +3,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/book.dart';
 import 'package:midoku/widgets/left_drawer.dart';
+import 'package:midoku/screens/catalog.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -84,6 +85,27 @@ class _SearchPageState extends State<SearchPage> {
           }
         },
       ),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            right: 16.0,
+            bottom: 16.0,
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CatalogPage(),
+                  ),
+                );
+              },
+              heroTag: null,
+              label: const Text('Catalog'),
+              icon: const Icon(Icons.home_outlined),
+            ),
+          ),
+        ]
+      ),
     );
   }
 }
@@ -127,40 +149,63 @@ class SearchPageDelegate extends SearchDelegate<String> {
   }
 
   Widget _buildSearchResults(BuildContext context) {
-    return FutureBuilder(
-      future: futureBooks,
-      builder: (context, AsyncSnapshot<List<Book>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          // Access the error information
-          var error = snapshot.error;
+    return Scaffold(
+      body: FutureBuilder(
+        future: futureBooks,
+        builder: (context, AsyncSnapshot<List<Book>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            // Access the error information
+            var error = snapshot.error;
 
-          // Handle the error condition
-          return Text('Error: $error');
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No item data available.'));
-        } else {
-          final List<Book> filteredBooks = snapshot.data!
-              .where((book) =>
-                  book.name.toLowerCase().contains(query.toLowerCase()))
-              .toList();
+            // Handle the error condition
+            return Text('Error: $error');
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No item data available.'));
+          } else {
+            final List<Book> filteredBooks = snapshot.data!
+                .where((book) =>
+                    book.name.toLowerCase().contains(query.toLowerCase()))
+                .toList();
 
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 0.7,
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: 0.7,
+              ),
+              itemCount: filteredBooks.length,
+              itemBuilder: (context, index) {
+                final catalogBook = filteredBooks[index];
+                return catalogBook.buildCatalogWidget(context);
+              },
+            );
+          }
+        },
+      ),
+    floatingActionButton: Stack(
+        children: [
+          Positioned(
+            right: 16.0,
+            bottom: 16.0,
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CatalogPage(),
+                  ),
+                );
+              },
+              heroTag: null,
+              label: const Text('Catalog'),
+              icon: const Icon(Icons.home_outlined),
             ),
-            itemCount: filteredBooks.length,
-            itemBuilder: (context, index) {
-              final catalogBook = filteredBooks[index];
-              return catalogBook.buildCatalogWidget(context);
-            },
-          );
-        }
-      },
+          ),
+        ]
+      ),
     );
   }
 }

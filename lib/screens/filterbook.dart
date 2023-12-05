@@ -5,6 +5,7 @@ import 'package:midoku/models/tags.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:midoku/screens/catalog.dart';
 
 class FilterBookPage extends StatefulWidget {
   const FilterBookPage({Key? key});
@@ -133,6 +134,27 @@ class _FilterBookPageState extends State<FilterBookPage> {
             );
           }
         },
+      ),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            right: 16.0,
+            bottom: 16.0,
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CatalogPage(),
+                  ),
+                );
+              },
+              heroTag: null,
+              label: const Text('Catalog'),
+              icon: const Icon(Icons.home_outlined),
+            ),
+          ),
+        ]
       ),
     );
   }

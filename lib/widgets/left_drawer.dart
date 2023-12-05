@@ -1,146 +1,170 @@
 import 'package:flutter/material.dart';
-import 'package:midoku/screens/add_custom_entry.dart';
 import 'package:midoku/screens/admin_page.dart';
 import 'package:midoku/screens/catalog.dart';
 import 'package:midoku/screens/collection.dart';
 import 'package:midoku/screens/filterbook.dart';
 import 'package:midoku/screens/login.dart';
 import 'package:midoku/screens/other_users.dart';
+import 'package:midoku/screens/searchPage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:midoku/screens/searchPage.dart';
+import 'package:midoku/models/current_user.dart';
 
 class LeftDrawer extends StatelessWidget {
-  const LeftDrawer({super.key});
+  const LeftDrawer({Key? key});
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+
+    Future<CurrentUser?> fetchCurrentUser() async {
+      final response = await request.get('http://127.0.0.1:8000/current-user/');
+      if (response != null) {
+        return CurrentUser.fromJson(response);
+      }
+      return null;
+    }
+
     return Drawer(
-      child: ListView(
-        children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.greenAccent,
-            ),
-            child: Column(
+      child: FutureBuilder(
+        future: fetchCurrentUser(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (!snapshot.hasData) {
+            return const Center(child: Text('No User data available.'));
+          } else {
+            final currentUser = snapshot.data as CurrentUser;
+
+            return ListView(
               children: [
-                Text(
-                  'M I D O K U',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.greenAccent,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'M I D O K U',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.all(10)),
+                      Text(
+                        'Your go-to reading partner!',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Padding(padding: EdgeInsets.all(10)),
-                Text(
-                  'Your go-to reading partner!',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
+                ListTile(
+                  leading: const Icon(Icons.home_outlined),
+                  title: const Text('Catalog Page'),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CatalogPage(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.filter_alt),
+                  title: const Text('Filter by tags'),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FilterBookPage(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.checklist),
+                  title: const Text('Collection Page'),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CollectionPage(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.search),
+                  title: const Text('Search'),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SearchPage()),
+                    );
+                  },
+                ),
+                if (currentUser.isStaff == true)
+                  ListTile(
+                    leading: const Icon(Icons.admin_panel_settings),
+                    title: const Text('Admin Page'),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AdminPage(),
+                        ),
+                      );
+                    },
                   ),
+                ListTile(
+                  leading: const Icon(Icons.supervisor_account),
+                  title: const Text('Other Users'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Other_userPage(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.logout),
+                  title: const Text('Logout'),
+                  onTap: () async {
+                    final response = await request.logout("http://127.0.0.1:8000/auth/logout/");
+                    String message = response["message"];
+                    if (response['status']) {
+                      String uname = response["username"];
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("$message Good bye, $uname."),
+                      ));
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("$message"),
+                      ));
+                    }
+                  },
                 ),
               ],
-            ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.home_outlined),
-            title: const Text('Catalog Page'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CatalogPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.filter_alt),
-            title: const Text('Filter by tags'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const FilterBookPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.checklist),
-            title: const Text('Collection Page'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CollectionPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.search),
-            title: const Text('Search'),
-            onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const SearchPage()),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.admin_panel_settings),
-            title: const Text('Admin Page'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const AdminPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.supervisor_account),
-            title: const Text('Other Users'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const Other_userPage(),
-                ),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
-            onTap: () async {
-              final response =
-                  await request.logout("http://127.0.0.1:8000/auth/logout/");
-              String message = response["message"];
-              if (response['status']) {
-                String uname = response["username"];
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message Good bye, $uname."),
-                ));
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
-                );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("$message"),
-                ));
-              }
-            },
-          ),
-        ],
+            );
+          }
+        },
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:midoku/models/user.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -21,6 +22,19 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
+    
+    Future<List<User>> fetchItem() async {
+      final response = await request.get('http://127.0.0.1:8000/other-users/');
+      // convert the JSON to Item object
+      List<User> list_item = [];
+      for (var d in response) {
+        if (d != null) {
+          list_item.add(User.fromJson(d));
+        }
+      }
+      return list_item;
+    }
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Register'),

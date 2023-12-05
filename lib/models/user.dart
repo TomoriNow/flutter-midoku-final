@@ -34,7 +34,7 @@ class User {
 
 class Fields {
     String password;
-    DateTime lastLogin;
+    DateTime? lastLogin;
     bool isSuperuser;
     String username;
     String firstName;
@@ -63,7 +63,7 @@ class Fields {
 
     factory Fields.fromJson(Map<String, dynamic> json) => Fields(
         password: json["password"],
-        lastLogin: DateTime.parse(json["last_login"]),
+        lastLogin: json["last_login"] == null ? null : DateTime.parse(json["last_login"]),
         isSuperuser: json["is_superuser"],
         username: json["username"],
         firstName: json["first_name"],
@@ -78,7 +78,7 @@ class Fields {
 
     Map<String, dynamic> toJson() => {
         "password": password,
-        "last_login": lastLogin.toIso8601String(),
+        "last_login": lastLogin?.toIso8601String(),
         "is_superuser": isSuperuser,
         "username": username,
         "first_name": firstName,

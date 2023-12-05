@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/user.dart';
-import 'package:http/http.dart' as http;
+import 'package:midoku/screens/other_users_collection.dart';
 
 class AdminPage extends StatefulWidget {
     const AdminPage({Key? key}) : super(key: key);
@@ -75,7 +73,17 @@ class _AdminPageState extends State<AdminPage> {
                 DataCell(Text(user.fields.username)),
                 DataCell(ElevatedButton(  
                   child: Text("Show ${user.fields.username}'s Catalog"),  
-                  onPressed: () {}
+                  onPressed: () {
+                    String theUsername = user.fields.username;
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OtherUserCollectionPage(
+                                  username: theUsername,
+                                ),
+                              ),
+                            );
+                  }
                 )),
                 DataCell(
                   ElevatedButton( 

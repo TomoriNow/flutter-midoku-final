@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midoku/screens/filterbook.dart';
-import 'package:midoku/screens/login.dart';
-import 'package:midoku/main.dart';
+import 'package:midoku/screens/filtertype.dart';
 import 'package:midoku/screens/searchPage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -93,6 +92,23 @@ class _CatalogPageState extends State<CatalogPage> {
           Positioned(
             right: 16.0,
             bottom: 80.0,
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FilterTypePage(),
+                  ),
+                );
+              },
+              heroTag: null,
+              label: const Text('Filter by type'),
+              icon: const Icon(Icons.my_library_books),
+            ),
+          ),
+          Positioned(
+            right: 16.0,
+            top: 80.0,
             child: FloatingActionButton.extended(
               onPressed: () {
                 Navigator.push(

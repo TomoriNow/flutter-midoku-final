@@ -3,6 +3,7 @@ import 'package:midoku/models/book.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:midoku/screens/catalog.dart';
 
 class FilterTypePage extends StatefulWidget {
   const FilterTypePage({Key? key});
@@ -93,7 +94,7 @@ class _FilterTypePageState extends State<FilterTypePage> {
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+                crossAxisCount: 2,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 childAspectRatio: 0.7,
@@ -106,6 +107,27 @@ class _FilterTypePageState extends State<FilterTypePage> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: Stack(
+        children: [
+          Positioned(
+            right: 16.0,
+            bottom: 16.0,
+            child: FloatingActionButton.extended(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CatalogPage(),
+                  ),
+                );
+              },
+              heroTag: null,
+              label: const Text('Catalog'),
+              icon: const Icon(Icons.home_outlined),
+            ),
+          ),
+        ]
       ),
     );
   }

@@ -123,7 +123,7 @@ class _DetailEntryPageState extends State<DetailEntryPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    book.taggits.toString(),
+                    book.taggits.join(", "),
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,

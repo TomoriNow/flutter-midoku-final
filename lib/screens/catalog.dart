@@ -73,7 +73,7 @@ class _CatalogPageState extends State<CatalogPage> {
       floatingActionButton: Stack(
         children: [
           Positioned(
-            right: 16.0,
+            left: 30.0,
             bottom: 16.0,
             child: FloatingActionButton.extended(
               onPressed: () {
@@ -90,7 +90,7 @@ class _CatalogPageState extends State<CatalogPage> {
             ),
           ),
           Positioned(
-            right: 16.0,
+            left: 30.0,
             bottom: 80.0,
             child: FloatingActionButton.extended(
               onPressed: () {
@@ -108,7 +108,7 @@ class _CatalogPageState extends State<CatalogPage> {
           ),
           Positioned(
             right: 16.0,
-            top: 80.0,
+            bottom: 16.0,
             child: FloatingActionButton.extended(
               onPressed: () {
                 Navigator.push(

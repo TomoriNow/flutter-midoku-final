@@ -25,9 +25,7 @@ class _BookEntryCardState extends State<BookEntryCard> {
           InkWell(
             child: Padding(
               padding: const EdgeInsets.all(20.0),
-              child: SizedBox(
-                height: 600,
-                child: ListView(
+              child:  ListView(
                   children: [
                     Text(
                       book.name,
@@ -75,7 +73,6 @@ class _BookEntryCardState extends State<BookEntryCard> {
                     )
                   ],
                 ),
-              ),
             ),
           );
           

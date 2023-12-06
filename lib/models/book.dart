@@ -63,9 +63,7 @@ class Book {
           children: [
             Padding(
             padding: const EdgeInsets.all(20.0),
-            child: SizedBox(
-              height: 600, // Set the desired height for the card
-              child: ListView(
+            child: ListView(
                 children: [
                   Text(
                     name,
@@ -138,7 +136,6 @@ class Book {
                     ),
                   ),
                 ],
-              ),
             ),
           ),
           Positioned(

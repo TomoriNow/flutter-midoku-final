@@ -39,7 +39,7 @@ class _BookEntryCardState extends State<BookEntryCard> {
                     Image.network(
                       book.imagelink,
                       width: 250,
-                      height: 400,
+                      height: 300,
                       fit: BoxFit.contain,
                       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                         return Image.asset(

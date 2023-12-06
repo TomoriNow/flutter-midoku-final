@@ -103,7 +103,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    widget.book.tags,
+                    widget.book.taggits.join(", "),
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.normal,

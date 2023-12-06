@@ -61,7 +61,7 @@ class _FilterBookPageState extends State<FilterBookPage> {
     setState(() {
       filteredBooks = list_item
           .where((book) => selectedTags
-              .every((selectedTag) => book.tags.contains(selectedTag)))
+              .every((selectedTag) => book.taggits.contains(selectedTag)))
           .toList();
     });
   }

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:midoku/screens/admin_page.dart';
+import 'package:midoku/screens/admin_landing.dart';
 import 'package:midoku/screens/catalog.dart';
 import 'package:midoku/screens/collection.dart';
-import 'package:midoku/screens/filterbook.dart';
 import 'package:midoku/screens/login.dart';
 import 'package:midoku/screens/other_users.dart';
-import 'package:midoku/screens/searchPage.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/current_user.dart';
@@ -100,7 +98,7 @@ class LeftDrawer extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const AdminPage(),
+                          builder: (context) => AdminLandingPage(),
                         ),
                       );
                     },

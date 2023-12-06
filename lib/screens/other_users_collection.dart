@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midoku/models/book_entry.dart';
-import 'package:midoku/screens/add_custom_entry.dart';
 import 'package:midoku/widgets/book_entry_card.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/widgets/left_drawer.dart';
-
+import 'package:midoku/screens/view_page.dart';
 
 
 
@@ -19,6 +18,7 @@ class OtherUserCollectionPage extends StatefulWidget {
 }
 
 class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
+  
   Future<List<BookEntry>> fetchItem() async {
     // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
     final request = context.watch<CookieRequest>();
@@ -38,9 +38,10 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
   }
   @override
   Widget build(BuildContext context) {
+    String temp_var = widget.username;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Collection Page'),
+        title: const Text("Collection Page"),
         backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
       ),
@@ -59,32 +60,50 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
           } else {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
+                crossAxisCount: 3,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
+                childAspectRatio: 0.7,
               ),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 final bookEntry = snapshot.data![index];
-                return BookEntryCard(bookEntry: bookEntry);
+                return Card(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      elevation: 10,
+      child: Stack(
+        children: [BookEntryCard(bookEntry: bookEntry),Positioned(
+            top: 8.0,
+            right: 8.0,
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.info),
+                  onPressed: () async {
+                    // Handle icon button press
+                    final bool? shouldRefresh = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ViewPage(bookEntry: bookEntry),
+                      ),
+                    );
+                    if (shouldRefresh != null && shouldRefresh) {
+                      // Refresh the card by calling setState
+                      setState(() {});
+                    }
+                  },
+                ),
+              ]
+            )
+          ),
+        ],
+      ),
+                );
               },
             );
           }
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          final bool? shouldRefresh = await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddCustomPage()),
-          );
-          if (shouldRefresh != null && shouldRefresh) {
-                  setState(() {});
-                }
-        },
-        label: const Text('Add Custom Entry'),
-        icon: const Icon(Icons.add),
-      )
     );
   }
 }

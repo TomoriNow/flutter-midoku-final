@@ -75,12 +75,20 @@ class Book {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Image.network(
-                    imagelink, // Replace with your image URL
-                    width: 250, // Set the width of the image
-                    height: 400, // Set the height of the image
-                    fit: BoxFit.fill, // BoxFit property to control how the image should be inscribed into the box
-                  ),
+                  if (imagelink != "/static/logos.png")
+                    Image.network(
+                      imagelink, // Replace with your image URL
+                      width: 250, // Set the width of the image
+                      height: 400, // Set the height of the image
+                      fit: BoxFit.fill, // BoxFit property to control how the image should be inscribed into the box
+                    ),
+                  if (imagelink == "/static/logos.png")
+                    Image.asset(
+                      'assets/logos.png', // Replace with your image path
+                      width: 250.0, // Set the width of the image
+                      height: 400.0, // Set the height of the image
+                      fit: BoxFit.fill, // Adjust the BoxFit as needed
+                    ),
                   const SizedBox(height: 20),
                   const Text(
                     "Type:",

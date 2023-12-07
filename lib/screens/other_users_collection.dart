@@ -6,6 +6,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:midoku/screens/view_page.dart';
+import 'package:midoku/screens/other_users.dart';
 
 
 
@@ -41,7 +42,7 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
     String temp_var = widget.username;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Collection Page"),
+        title: Text("$temp_var's Collection Page"),
         backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
       ),
@@ -103,6 +104,12 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
             );
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Other_userPage()),);
+        },
+        child: const Icon(Icons.arrow_back),
       ),
     );
   }

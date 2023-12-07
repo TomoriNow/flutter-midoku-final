@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:midoku/models/user.dart';
-import 'package:midoku/screens/user_settings.dart';
+import 'package:midoku/models/bookpost.dart';
+import 'package:midoku/screens/detailed_bookpost.dart';
 
-class ManageUsersPage extends StatefulWidget {
-    const ManageUsersPage({Key? key}) : super(key: key);
+class ManageBookpostsPage extends StatefulWidget {
+    const ManageBookpostsPage({Key? key}) : super(key: key);
 
     @override
-    _ManageUsersPageState createState() => _ManageUsersPageState();
+    _ManageBookpostsPageState createState() => _ManageBookpostsPageState();
 }
 
-class _ManageUsersPageState extends State<ManageUsersPage> {
-  Future<List<User>> fetchItem() async {
+class _ManageBookpostsPageState extends State<ManageBookpostsPage> {
+  Future<List<Bookpost>> fetchItem() async {
       final request = context.watch<CookieRequest>();
-      final response = await request.get('http://127.0.0.1:8000/other-users/');
+      final response = await request.get('http://127.0.0.1:8000/bookpost-list/');
 
-      List<User> list_item = [];
+      List<Bookpost> list_item = [];
       for (var d in response) {
         if (d != null) {
-          list_item.add(User.fromJson(d));
+          list_item.add(Bookpost.fromJson(d));
         }
       }
       return list_item;
@@ -31,7 +31,7 @@ class _ManageUsersPageState extends State<ManageUsersPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'User Settings Page',
+          'Book Suggestions Page',
         ),
         backgroundColor: Colors.greenAccent,
         foregroundColor: Colors.white,
@@ -39,7 +39,7 @@ class _ManageUsersPageState extends State<ManageUsersPage> {
       drawer: const LeftDrawer(),
       body: FutureBuilder(
         future: fetchItem(),
-        builder: (context, AsyncSnapshot<List<User>> snapshot) {
+        builder: (context, AsyncSnapshot<List<Bookpost>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
@@ -49,7 +49,7 @@ class _ManageUsersPageState extends State<ManageUsersPage> {
             // Handle the error condition
             return Text('Error: $error');
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No User data available.'));
+            return const Center(child: Text('No Bookpost data available.'));
           } else {
             return Center(
               child: Container(
@@ -57,7 +57,7 @@ class _ManageUsersPageState extends State<ManageUsersPage> {
                 child: ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    final user = snapshot.data![index];
+                    final bookpost = snapshot.data![index];
 
                     return Card(
                       elevation: 2,
@@ -66,8 +66,8 @@ class _ManageUsersPageState extends State<ManageUsersPage> {
                           .green, // Set the background color for the ListTile
                       child: ListTile(
                         title: Text(
-                          user.fields.username,
-                          style: TextStyle(
+                          bookpost.name,
+                          style: const TextStyle(
                             color: Colors.white, // Set the text color to white
                             fontWeight: FontWeight.bold, // Make the text bold
                           ),
@@ -77,17 +77,17 @@ class _ManageUsersPageState extends State<ManageUsersPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => UserSettingsPage(user: user),
+                                builder: (context) => DetailBookpostPage(bookPost: bookpost),
                               ),
                             );
-                          },
+                            },
                           style: ElevatedButton.styleFrom(
                             primary: Colors
                                 .white, // Set the background color for the button
                           ),
                           child: Text(
-                            "${user.fields.username}'s Settings",
-                            style: TextStyle(
+                            "View ${bookpost.name}",
+                            style: const TextStyle(
                               color:
                                   Colors.green, // Set the text color to green
                             ),

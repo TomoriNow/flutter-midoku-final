@@ -7,6 +7,7 @@ import 'package:midoku/screens/other_users.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/current_user.dart';
+import 'package:midoku/screens/add_bookpost.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});
@@ -86,6 +87,18 @@ class LeftDrawer extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const CollectionPage(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.book),
+                  title: const Text('Post Book Suggestion'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddBookPostPage(),
                       ),
                     );
                   },

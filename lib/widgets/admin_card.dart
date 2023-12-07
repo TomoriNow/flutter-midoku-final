@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midoku/screens/manage_users.dart';
+import 'package:midoku/screens/manage_bookposts.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +39,11 @@ class AdminCard extends StatelessWidget {
                 ),
               );
           } else if (item.name == "Manage Book Posts") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ManageBookpostsPage(),
+                ),
+              );
               
           } else if (item.name == "Manage Tag Posts") {
             

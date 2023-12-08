@@ -46,11 +46,24 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "Book title: ${bookPost.name}",
-                      style: const TextStyle(
-                        fontSize: 23,
-                        fontWeight: FontWeight.bold,
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "${bookPost.name} ",
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "by ${bookPost.author}",
+                            style: const TextStyle(
+                              fontSize: 15,
+                              // Add other styling properties for the author
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     const SizedBox(height: 10),

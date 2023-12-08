@@ -65,11 +65,23 @@ class Book {
             padding: const EdgeInsets.all(20.0),
             child: ListView(
                 children: [
-                  Text(
-                    name,
-                    style: const TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "$name ",
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "by $author",
+                          style: const TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),

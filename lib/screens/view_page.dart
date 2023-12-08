@@ -60,11 +60,24 @@ class _ViewPageState extends State<ViewPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Book title: ${book.name}",
-                    style: const TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "${book.name} ",
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "by ${book.author}",
+                          style: const TextStyle(
+                            fontSize: 15,
+                            // Add other styling properties for the author
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),

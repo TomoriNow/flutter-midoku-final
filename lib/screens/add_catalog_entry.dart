@@ -47,11 +47,23 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.book.name,
-                    style: const TextStyle(
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold,
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "${widget.book.name} ",
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "by ${widget.book.author}",
+                          style: const TextStyle(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(height: 10),

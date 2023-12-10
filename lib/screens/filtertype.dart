@@ -29,7 +29,7 @@ class _FilterTypePageState extends State<FilterTypePage> {
   Future<void> fetchBooks() async {
     final request = context.read<CookieRequest>();
     final response =
-        await request.get('http://127.0.0.1:8000/flutter-catalog/');
+        await request.get('https://galihsopod.pythonanywhere.com/flutter-catalog/');
 
     setState(() {
       bookList = []; // Clear existing data

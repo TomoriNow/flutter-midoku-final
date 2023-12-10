@@ -51,7 +51,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                 ElevatedButton(  
                       child: const Text('Delete User'),  
                       onPressed: () async {
-                        final response = await request.post('http://127.0.0.1:8000/delete_user_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
+                        final response = await request.post('https://galihsopod.pythonanywhere.com/delete_user_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => const ManageUsersPage()),
@@ -64,7 +64,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                     ElevatedButton(  
                       child: const Text('Make Admin'),  
                       onPressed: () async {
-                        final response = await request.post('http://127.0.0.1:8000/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
+                        final response = await request.post('https://galihsopod.pythonanywhere.com/make_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => const ManageUsersPage()),
@@ -80,7 +80,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                     ElevatedButton(  
                       child: const Text('Revoke Admin'),  
                       onPressed: () async {
-                        final response = await request.post('http://127.0.0.1:8000/revoke_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
+                        final response = await request.post('https://galihsopod.pythonanywhere.com/revoke_admin_flutter/${Uri.encodeComponent(user.fields.username)}/', {"status": "success"});
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => const ManageUsersPage()),

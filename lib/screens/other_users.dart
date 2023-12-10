@@ -19,7 +19,7 @@ class _OtherUserPageState extends State<Other_userPage> {
     final request = context.watch<CookieRequest>();
 
     Future<List<User>> fetchItem() async {
-      final response = await request.get('http://127.0.0.1:8000/other-users/');
+      final response = await request.get('https://galihsopod.pythonanywhere.com/other-users/');
       // convert the JSON to Item object
       List<User> list_item = [];
       for (var d in response) {

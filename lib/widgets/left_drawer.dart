@@ -17,7 +17,7 @@ class LeftDrawer extends StatelessWidget {
     final request = context.watch<CookieRequest>();
 
     Future<CurrentUser?> fetchCurrentUser() async {
-      final response = await request.get('http://127.0.0.1:8000/current-user/');
+      final response = await request.get('https://galihsopod.pythonanywhere.com/current-user/');
       if (response != null) {
         return CurrentUser.fromJson(response);
       }
@@ -132,7 +132,7 @@ class LeftDrawer extends StatelessWidget {
                   leading: const Icon(Icons.logout),
                   title: const Text('Logout'),
                   onTap: () async {
-                    final response = await request.logout("http://127.0.0.1:8000/auth/logout/");
+                    final response = await request.logout("https://galihsopod.pythonanywhere.com/auth/logout/");
                     String message = response["message"];
                     if (response['status']) {
                       String uname = response["username"];

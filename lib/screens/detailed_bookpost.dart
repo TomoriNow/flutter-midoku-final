@@ -134,7 +134,7 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                       child: const Text('Accept Book'),
                       onPressed: () async {
                         print(Uri.encodeComponent(bookPost.id.toString()));
-                        final response = await request.post('http://127.0.0.1:8000/accept-book-flutter/${Uri.encodeComponent(bookPost.id.toString())}/', {"status": "success"});
+                        final response = await request.post('https://galihsopod.pythonanywhere.com/accept-book-flutter/${Uri.encodeComponent(bookPost.id.toString())}/', {"status": "success"});
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => const ManageBookpostsPage()),
@@ -146,7 +146,7 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                       child: const Text('Reject Book'),  
                       onPressed: () async {
                         print(Uri.encodeComponent(bookPost.id.toString()));
-                        final response = await request.post('http://127.0.0.1:8000/reject-book-flutter/${Uri.encodeComponent(bookPost.id.toString())}/', {"status": "success"});
+                        final response = await request.post('https://galihsopod.pythonanywhere.com/reject-book-flutter/${Uri.encodeComponent(bookPost.id.toString())}/', {"status": "success"});
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => const ManageBookpostsPage()),

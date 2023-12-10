@@ -272,7 +272,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                       if (_formKey.currentState!.validate()) {
                         // Send request to Django and wait for the response
                         final response = await request.postJson(
-                          "http://127.0.0.1:8000/create-catalog-flutter/",
+                          "https://galihsopod.pythonanywhere.com/create-catalog-flutter/",
                           jsonEncode(<String, dynamic>{
                             'id': widget.book.id,
                             'status': _status,

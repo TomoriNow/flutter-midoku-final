@@ -24,7 +24,7 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
     // TODO: Change the URL to your Django app's URL. Don't forget to add the trailing slash (/) if needed.
     final request = context.watch<CookieRequest>();
     var encodedUsername = Uri.encodeComponent(widget.username);
-    var url = 'http://127.0.0.1:8000/entry_flutter/$encodedUsername/';
+    var url = 'https://galihsopod.pythonanywhere.com/entry_flutter/$encodedUsername/';
     var response = await request.get(url);
     // decode the response to JSON
 
@@ -57,7 +57,7 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
             // Handle the error condition
             return Text('Error: $error');
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('You have no books in your collection.'));
+            return  Center(child: Text("There are no books in $temp_var's collection."));
           } else {
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

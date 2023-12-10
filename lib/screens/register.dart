@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final request = context.watch<CookieRequest>();
     
     Future<List<User>> fetchItem() async {
-      final response = await request.get('http://127.0.0.1:8000/other-users/');
+      final response = await request.get('https://galihsopod.pythonanywhere.com/other-users/');
       // convert the JSON to Item object
       List<User> list_item = [];
       for (var d in response) {
@@ -118,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     String password1 = _password1Controller.text;
                     String password2 = _password2Controller.text;
 
-                    final response = await request.postJson("http://127.0.0.1:8000/auth/register/", 
+                    final response = await request.postJson("https://galihsopod.pythonanywhere.com/auth/register/", 
                     jsonEncode(<String, String>{
                       'username': username,
                       'password1': password1,

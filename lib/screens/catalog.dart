@@ -18,7 +18,7 @@ class CatalogPage extends StatefulWidget {
 class _CatalogPageState extends State<CatalogPage> {
   Future<List<Book>> fetchItem() async {
       final request = context.watch<CookieRequest>();
-      final response = await request.get('http://127.0.0.1:8000/flutter-catalog/');
+      final response = await request.get('https://galihsopod.pythonanywhere.com/flutter-catalog/');
 
       // convert the JSON to Item object
       List<Book> list_item = [];

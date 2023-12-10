@@ -16,7 +16,7 @@ class _SearchPageState extends State<SearchPage> {
   Future<List<Book>> fetchItem() async {
     final request = Provider.of<CookieRequest>(context, listen: false);
     final response =
-        await request.get('http://127.0.0.1:8000/flutter-catalog/');
+        await request.get('https://galihsopod.pythonanywhere.com/flutter-catalog/');
 
     // convert the JSON to Item object
     List<Book> list_item = [];

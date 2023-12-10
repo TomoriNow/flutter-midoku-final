@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midoku/screens/manage_users.dart';
 import 'package:midoku/screens/manage_bookposts.dart';
+import 'package:midoku/screens/manage_tagposts.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -34,22 +35,25 @@ class AdminCard extends StatelessWidget {
           // Navigate to the appropriate route (depending on the button type)
           if (item.name == "Manage Users") {
             Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ManageUsersPage(),
-                ),
-              );
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ManageUsersPage(),
+              ),
+            );
           } else if (item.name == "Manage Book Posts") {
             Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ManageBookpostsPage(),
-                ),
-              );
-              
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ManageBookpostsPage(),
+              ),
+            );
           } else if (item.name == "Manage Tag Posts") {
-            
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ManageTagPostsPage()),
+            );
           }
-            
-          
         },
         child: Container(
           // Container to hold Icon and Text

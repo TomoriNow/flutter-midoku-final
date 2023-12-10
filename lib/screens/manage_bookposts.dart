@@ -6,25 +6,26 @@ import 'package:midoku/models/bookpost.dart';
 import 'package:midoku/screens/detailed_bookpost.dart';
 
 class ManageBookpostsPage extends StatefulWidget {
-    const ManageBookpostsPage({Key? key}) : super(key: key);
+  const ManageBookpostsPage({Key? key}) : super(key: key);
 
-    @override
-    _ManageBookpostsPageState createState() => _ManageBookpostsPageState();
+  @override
+  _ManageBookpostsPageState createState() => _ManageBookpostsPageState();
 }
 
 class _ManageBookpostsPageState extends State<ManageBookpostsPage> {
   Future<List<Bookpost>> fetchItem() async {
-      final request = context.watch<CookieRequest>();
-      final response = await request.get('http://127.0.0.1:8000/bookpost-list/');
+    final request = context.watch<CookieRequest>();
+    final response = await request.get('http://127.0.0.1:8000/bookpost-list/');
 
-      List<Bookpost> list_item = [];
-      for (var d in response) {
-        if (d != null) {
-          list_item.add(Bookpost.fromJson(d));
-        }
+    List<Bookpost> list_item = [];
+    for (var d in response) {
+      if (d != null) {
+        list_item.add(Bookpost.fromJson(d));
       }
-      return list_item;
+    }
+    return list_item;
   }
+
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -77,10 +78,11 @@ class _ManageBookpostsPageState extends State<ManageBookpostsPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DetailBookpostPage(bookPost: bookpost),
+                                builder: (context) =>
+                                    DetailBookpostPage(bookPost: bookpost),
                               ),
                             );
-                            },
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: Colors
                                 .white, // Set the background color for the button

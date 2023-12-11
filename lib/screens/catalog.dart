@@ -41,8 +41,8 @@ class _CatalogPageState extends State<CatalogPage> {
       ),
       drawer: const LeftDrawer(),
       body: AnimatedContainer(
-        duration: Duration(seconds: 1),
-        decoration: BoxDecoration(
+        duration: const Duration(seconds: 1),
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

@@ -23,22 +23,49 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('User Settings'),
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
-      body: Center(
+      body: AnimatedContainer(
+            duration: const Duration(seconds: 1),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.blue,
+                  Colors.purple,
+                ],
+              ),
+            ),
+        child: Center(
         child: Card(
-          elevation: 8.0, // Add a shadow
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.0), // Add rounded corners
+          elevation: 10.0,
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 200),
+              shadowColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
           ),
-          margin: const EdgeInsets.all(20.0),
+          child: Container(
+              width: 300.0,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+          ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   user.fields.username,
@@ -93,9 +120,9 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                   const SizedBox(height: 12),
               ],
             ),
-          ),
+          ),),
         ),
-      ),
+      ),),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pop(context); // Return to the item list page

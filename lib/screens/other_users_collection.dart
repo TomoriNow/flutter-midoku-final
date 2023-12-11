@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:midoku/screens/view_page.dart';
 import 'package:midoku/screens/other_users.dart';
+import 'package:midoku/screens/favourite_book_page.dart';
 
 
 
@@ -132,12 +133,37 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
         ),
       ),
       
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  crossAxisAlignment: CrossAxisAlignment.end,
+  children: [
+  
+        FloatingActionButton.extended(
+        heroTag: "button1",
         onPressed: () {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Other_userPage()),);
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const Other_userPage()),
+          );
         },
-        child: const Icon(Icons.arrow_back),
+        label: const Text('Back'),
+        icon: const Icon(Icons.arrow_back),
       ),
+    const SizedBox(width: 16), // Adjust spacing if needed
+    FloatingActionButton.extended(
+      heroTag: "button2",
+      onPressed: () async {
+        // Navigate to the screen displaying user's favorite books
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FavouriteBookPage(username: widget.username)),
+        );
+      },
+      label: const Text('Favourite Book'),
+      icon: const Icon(Icons.favorite),
+    ),
+  ],
+      )
     );
   }
 }

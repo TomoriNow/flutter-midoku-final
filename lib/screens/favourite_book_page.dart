@@ -8,6 +8,7 @@ import 'package:midoku/screens/login.dart';
 import 'package:midoku/screens/add_to_collection_page.dart';
 import 'package:midoku/models/book_entry.dart';
 import 'package:midoku/widgets/book_entry_card.dart';
+import 'package:midoku/screens/other_users_admin.dart';
 class FavouriteBookPage extends StatefulWidget {
   final String username;
   const FavouriteBookPage({Key? key, required this.username}) : super(key: key);
@@ -61,7 +62,37 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
             );
           }
         },
+      ),floatingActionButton: Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  crossAxisAlignment: CrossAxisAlignment.end,
+  children: [
+  
+        FloatingActionButton.extended(
+        heroTag: "button1",
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const Other_userPageAdmin()),
+          );
+        },
+        label: const Text('Back'),
+        icon: const Icon(Icons.arrow_back),
       ),
+    const SizedBox(width: 16), // Adjust spacing if needed
+    FloatingActionButton.extended(
+      heroTag: "button2",
+      onPressed: () async {
+        // Navigate to the screen displaying user's favorite books
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FavouriteBookPage(username: widget.username)),
+        );
+      },
+      label: const Text('Favourite Book'),
+      icon: const Icon(Icons.favorite),
+    ),
+  ],
+      )
     );
   }
 }

@@ -78,55 +78,71 @@ class _CollectionPageState extends State<CollectionPage> {
                 itemBuilder: (context, index) {
                   final bookEntry = snapshot.data![index];
                   return Card(
-        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        elevation: 10,
-        child: Stack(
-          children: [BookEntryCard(bookEntry: bookEntry),Positioned(
-              top: 8.0,
-              right: 8.0,
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.info),
-                    onPressed: () async {
-                      // Handle icon button press
-                      final bool? shouldRefresh = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DetailEntryPage(bookEntry: bookEntry),
+                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      surfaceTintColor: Colors.white,
+                      elevation: 10,
+                      child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(0.5), // Adjust the opacity as needed
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // You can adjust the offset to control the direction of the glow
                         ),
-                      );
-                      if (shouldRefresh != null && shouldRefresh) {
-                        // Refresh the card by calling setState
-                        setState(() {});
-                      }
-                    },
-                  ),
-                  IconButton(onPressed: () async {
-                    final request = Provider.of<CookieRequest>(context, listen: false);
-                    final response = await request.postJson(
-                      "http://127.0.0.1:8000/delete-entry-flutter/",
-                      jsonEncode(<String, dynamic>{
-                        'id': bookEntry.pk,
-                      })
-                    );
-                    if (response['status'] == 'success') {
-                      setState(() {
-                        snapshot.data!.removeAt(index);
-                      });
-                    } else {
-                      ScaffoldMessenger.of(context)
-                      .showSnackBar(const SnackBar(
-                        content:
-                          Text("Something went wrong, please try again."),
-                      ));
-                    }
-                  }, icon: Icon(Icons.delete))
-                ]
-              )
-            ),
-          ],
-        ),
+                      ],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Stack(
+                        children: [
+                          Padding(padding: const EdgeInsets.only(top: 3.5), child: BookEntryCard(bookEntry: bookEntry)),
+                          Positioned(
+                            top: 0.0,
+                            right: 0.0,
+                            child: Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.info),
+                                  onPressed: () async {
+                                    // Handle icon button press
+                                    final bool? shouldRefresh = await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DetailEntryPage(bookEntry: bookEntry),
+                                      ),
+                                    );
+                                    if (shouldRefresh != null && shouldRefresh) {
+                                      // Refresh the card by calling setState
+                                      setState(() {});
+                                    }
+                                  },
+                                ),
+                                IconButton(onPressed: () async {
+                                  final request = Provider.of<CookieRequest>(context, listen: false);
+                                  final response = await request.postJson(
+                                    "http://127.0.0.1:8000/delete-entry-flutter/",
+                                    jsonEncode(<String, dynamic>{
+                                      'id': bookEntry.pk,
+                                    })
+                                  );
+                                  if (response['status'] == 'success') {
+                                    setState(() {
+                                      snapshot.data!.removeAt(index);
+                                    });
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                      content:
+                                        Text("Something went wrong, please try again."),
+                                    ));
+                                  }
+                                }, icon: Icon(Icons.delete))
+                              ]
+                            )
+                          ),
+                        ],
+                      ),
+                    ),
                   );
                 },
               );

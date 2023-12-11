@@ -8,6 +8,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/current_user.dart';
 import 'package:midoku/screens/add_bookpost.dart';
+import 'package:midoku/screens/add_tagpost.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});
@@ -99,6 +100,18 @@ class LeftDrawer extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const AddBookPostPage(),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.bookmark),
+                  title: const Text('Post Tag Suggestion'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddTagPostPage(),
                       ),
                     );
                   },

@@ -8,6 +8,7 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/current_user.dart';
 import 'package:midoku/screens/add_bookpost.dart';
+import 'package:midoku/screens/add_tagpost.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});
@@ -103,6 +104,18 @@ class LeftDrawer extends StatelessWidget {
                     );
                   },
                 ),
+                ListTile(
+                  leading: const Icon(Icons.add_box),
+                  title: const Text('Add Tag'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AddTagPostPage(),
+                      ),
+                    );
+                  },
+                ),
                 if (currentUser.isStaff == true)
                   ListTile(
                     leading: const Icon(Icons.admin_panel_settings),
@@ -132,7 +145,8 @@ class LeftDrawer extends StatelessWidget {
                   leading: const Icon(Icons.logout),
                   title: const Text('Logout'),
                   onTap: () async {
-                    final response = await request.logout("http://127.0.0.1:8000/auth/logout/");
+                    final response = await request
+                        .logout("http://127.0.0.1:8000/auth/logout/");
                     String message = response["message"];
                     if (response['status']) {
                       String uname = response["username"];
@@ -141,7 +155,8 @@ class LeftDrawer extends StatelessWidget {
                       ));
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const LoginPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()),
                       );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

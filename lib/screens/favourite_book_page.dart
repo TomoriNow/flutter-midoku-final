@@ -38,7 +38,7 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favourite Book Page'),
+        title:  Text("${widget.username}'s Favourite Book"),
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
       ),
@@ -61,10 +61,13 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             var error = snapshot.error;
+            if (error.toString() == "Expected a value of type 'String', but got one of type 'Null'"){
+              return Center(child: Text("${widget.username} doesn't have a favourite book."));
+            }
             print(error);
-            return const Center(child: Text('User has not picked a favorite book.'));
+            return Text('Error: $error');
           } else if (!snapshot.hasData || snapshot.data == null) {
-            return const Center(child: Text('You have no books in your collection.'));
+            return Center(child: Text("${widget.username} doesn't have a favourite book."));
           } else {
             final bookEntry = snapshot.data!;
             return Card(
@@ -77,37 +80,17 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
       ),
       ),
       
-      floatingActionButton: Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-  
-        FloatingActionButton.extended(
+      floatingActionButton: 
+      FloatingActionButton.extended(
         heroTag: "button1",
         onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const Other_userPageAdmin()),
-          );
+          Navigator.pop(
+            context
+            );
         },
         label: const Text('Back'),
         icon: const Icon(Icons.arrow_back),
-      ),
-    const SizedBox(width: 16), // Adjust spacing if needed
-    FloatingActionButton.extended(
-      heroTag: "button2",
-      onPressed: () async {
-        // Navigate to the screen displaying user's favorite books
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => FavouriteBookPage(username: widget.username)),
-        );
-      },
-      label: const Text('Favourite Book'),
-      icon: const Icon(Icons.favorite),
-    ),
-  ],
-      )
+      ), 
     );
   }
 }

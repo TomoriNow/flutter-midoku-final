@@ -70,7 +70,7 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
               // Handle the error condition
               return Text('Error: $error');
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('You have no books in your collection.'));
+              return Center(child: Text('$temp_var has no books in their collection.'));
             } else {
               return GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

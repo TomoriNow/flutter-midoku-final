@@ -43,7 +43,19 @@ class _CollectionPageState extends State<CollectionPage> {
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
-      body: FutureBuilder(
+      body: AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue,
+              Colors.greenAccent,
+            ],
+          ),
+        ),
+        child: FutureBuilder(
         future: _bookEntries,
         builder: (context, AsyncSnapshot<List<BookEntry>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -69,10 +81,23 @@ class _CollectionPageState extends State<CollectionPage> {
                 return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       elevation: 10,
-      child: Stack(
-        children: [BookEntryCard(bookEntry: bookEntry),Positioned(
-            top: 8.0,
-            right: 8.0,
+      child:  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(0.5), // Adjust the opacity as needed
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // You can adjust the offset to control the direction of the glow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Stack(
+        children: [Padding(padding: const EdgeInsets.only(top: 4.5), child: BookEntryCard(bookEntry: bookEntry)),
+        Positioned(
+            top: 0.0,
+            right: 0.0,
             child: Row(
               children: [
                 IconButton(
@@ -130,11 +155,12 @@ class _CollectionPageState extends State<CollectionPage> {
           ),
         ],
       ),
-                );
+                ),);
               },
             );
           }
         },
+      ),
       ),
       floatingActionButton: Row(
   mainAxisAlignment: MainAxisAlignment.end,

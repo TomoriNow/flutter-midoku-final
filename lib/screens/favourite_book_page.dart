@@ -19,10 +19,10 @@ class FavouriteBookPage extends StatefulWidget {
 
 class _FavouriteBookPageState extends State<FavouriteBookPage> {
   late Future<BookEntry> _bookEntry;
-
   Future<BookEntry> fetchItem() async {
     final request = context.watch<CookieRequest>();
     var encodedUsername = Uri.encodeComponent(widget.username);
+    print(widget.username);
     var url = 'http://127.0.0.1:8000/favourite-entry-flutter-get/$encodedUsername/';
     var response = await request.get(url);
     return BookEntry.fromJson(response);
@@ -38,7 +38,7 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Collection Page'),
+        title: const Text('Favourite Book Page'),
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
       ),
@@ -50,7 +50,7 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
           } else if (snapshot.hasError) {
             var error = snapshot.error;
             print(error);
-            return Text('Error: $error');
+            return Text('User has not picked a favorite book');
           } else if (!snapshot.hasData || snapshot.data == null) {
             return const Center(child: Text('You have no books in your collection.'));
           } else {

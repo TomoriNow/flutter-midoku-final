@@ -12,11 +12,10 @@ import 'package:midoku/screens/add_tagpost.dart';
 import 'package:midoku/screens/other_users_admin.dart';
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});
-
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-
+    var username;
     Future<CurrentUser?> fetchCurrentUser() async {
       final response = await request.get('http://127.0.0.1:8000/current-user/');
       if (response != null) {
@@ -29,6 +28,8 @@ class LeftDrawer extends StatelessWidget {
       child: FutureBuilder(
         future: fetchCurrentUser(),
         builder: (context, snapshot) {
+          
+          
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
@@ -87,7 +88,7 @@ class LeftDrawer extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const CollectionPage(),
+                        builder: (context) => CollectionPage(username: snapshot.data?.username),
                       ),
                     );
                   },

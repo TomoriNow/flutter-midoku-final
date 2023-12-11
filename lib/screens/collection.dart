@@ -7,9 +7,10 @@ import 'package:midoku/widgets/book_entry_card.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/widgets/left_drawer.dart';
-
+import 'package:midoku/screens/favourite_book_page.dart';
 class CollectionPage extends StatefulWidget {
-    const CollectionPage({Key? key}) : super(key: key);
+    final username;
+    const CollectionPage({Key? key, required this.username}) : super(key: key);
 
     @override
     _CollectionPageState createState() => _CollectionPageState();
@@ -90,6 +91,20 @@ class _CollectionPageState extends State<CollectionPage> {
                     }
                   },
                 ),
+                IconButton(
+                  icon: const Icon(Icons.star),
+                  onPressed: () async {
+                    // Handle icon button press
+                  final request = Provider.of<CookieRequest>(context, listen: false);
+                  final response = await request.postJson(
+                    "http://127.0.0.1:8000/favourite-entry-flutter-post/",
+                    jsonEncode(<String, dynamic>{
+                      'id': bookEntry.pk,
+                      'username': widget.username
+                    })
+                  );
+                  },
+                ),
                 IconButton(onPressed: () async {
                   final request = Provider.of<CookieRequest>(context, listen: false);
                   final response = await request.postJson(
@@ -121,21 +136,42 @@ class _CollectionPageState extends State<CollectionPage> {
           }
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          final bool? shouldRefresh = await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const AddCustomPage()),
-          );
-          if (shouldRefresh != null && shouldRefresh) {
-                  setState(() {
-                    _bookEntries = fetchItem();
-                  });
-                }
-        },
-        label: const Text('Add Custom Entry'),
-        icon: const Icon(Icons.add),
-      )
+      floatingActionButton: Row(
+  mainAxisAlignment: MainAxisAlignment.end,
+  crossAxisAlignment: CrossAxisAlignment.end,
+  children: [
+    FloatingActionButton.extended(
+      heroTag: "button1",
+      onPressed: () async {
+        final bool? shouldRefresh = await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AddCustomPage()),
+        );
+        if (shouldRefresh != null && shouldRefresh) {
+          setState(() {
+            _bookEntries = fetchItem();
+          });
+        }
+      },
+      label: const Text('Add Custom Entry'),
+      icon: const Icon(Icons.add),
+    ),
+    const SizedBox(width: 16), // Adjust spacing if needed
+    FloatingActionButton.extended(
+      heroTag: "button2",
+      onPressed: () async {
+        // Navigate to the screen displaying user's favorite books
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FavouriteBookPage(username: widget.username)),
+        );
+      },
+      label: const Text('Favourite Book'),
+      icon: const Icon(Icons.favorite),
+    ),
+  ],
+)
+
     );
   }
 }

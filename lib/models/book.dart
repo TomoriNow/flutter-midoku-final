@@ -57,7 +57,7 @@ class Book {
       return Card(
         surfaceTintColor: Colors.white,
         margin: const EdgeInsets.symmetric(
-          horizontal: 16, vertical: 12,
+          horizontal: 4, vertical: 3,
         ),
         elevation: 10,
         child:  Container(
@@ -86,12 +86,14 @@ class Book {
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
                         ),
                         TextSpan(
                           text: "by $author",
                           style: const TextStyle(
                             fontSize: 15,
+                            color: Colors.black,
                           ),
                         ),
                       ],
@@ -102,17 +104,14 @@ class Book {
                     Image.network(
                       imagelink, // Replace with your image URL
                       width: 250, // Set the width of the image
-                      height: 300, // Set the height of the image
                       fit: BoxFit.contain, // BoxFit property to control how the image should be inscribed into the box
                     ),
                   if (imagelink == "/static/logos.png")
                     Image.asset(
                       'assets/logos.png', // Replace with your image path
                       width: 250.0, // Set the width of the image
-                      height: 300.0, // Set the height of the image
                       fit: BoxFit.contain, // Adjust the BoxFit as needed
                     ),
-                  const SizedBox(height: 20),
                   const Text(
                     "Type:",
                     style: TextStyle(
@@ -120,7 +119,6 @@ class Book {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
                   Text(
                     typeValues.reverse[type]!,
                     style: const TextStyle(
@@ -128,15 +126,13 @@ class Book {
                       fontWeight: FontWeight.normal,
                     ),
                   ),
-                  const SizedBox(height: 20),
                   const Text(
-                    "Description:",
+                    "\nDescription:",
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
                   Text(
                     description,
                     style: const TextStyle(
@@ -144,15 +140,13 @@ class Book {
                       fontWeight: FontWeight.normal,
                     ),
                   ),
-                  const SizedBox(height: 20),
                   const Text(
-                    "Tags:",
+                    "\nTags:",
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 10),
                   Text(
                     taggits.join(", "),
                     style: const TextStyle(

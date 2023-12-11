@@ -54,12 +54,14 @@ class _AddtoCollectionPage extends State<AddtoCollectionPage> {
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
                         ),
                         TextSpan(
                           text: "by ${widget.bookEntry.author}",
                           style: const TextStyle(
                             fontSize: 15,
+                            color: Colors.black,
                           ),
                         ),
                       ],
@@ -68,9 +70,15 @@ class _AddtoCollectionPage extends State<AddtoCollectionPage> {
                   const SizedBox(height: 10),
                   Image.network(
                     widget.bookEntry.imagelink, // Replace with your image URL
-                    width: 250, // Set the width of the image
-                    height: 400, // Set the height of the image
+                    width: 250, // Set the width of the image // Set the height of the image
                     fit: BoxFit.contain, // BoxFit property to control how the image should be inscribed into the box
+                    errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                        return Image.asset(
+                          'assets/logos.png',
+                          width: 200.0,
+                          fit: BoxFit.contain,
+                        );
+                    },
                   ),
                   const SizedBox(height: 20),
                   const Text(

@@ -40,12 +40,14 @@ class _BookEntryCardState extends State<BookEntryCard> {
                       style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
                     TextSpan(
                       text: "by ${book.author}",
                       style: const TextStyle(
                         fontSize: 15,
+                        color: Colors.black,
                         // Add other styling properties for the author
                       ),
                     ),
@@ -55,18 +57,15 @@ class _BookEntryCardState extends State<BookEntryCard> {
               Image.network(
                 book.imagelink,
                 width: 250,
-                height: 300,
                 fit: BoxFit.contain,
                 errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                   return Image.asset(
                     'assets/logos.png',
                     width: 200.0,
-                    height: 100.0,
                     fit: BoxFit.contain,
                   );
                 },
               ),
-              const SizedBox(height: 10),
               Wrap(
                 alignment: WrapAlignment.spaceBetween,
                 children: [
@@ -106,27 +105,21 @@ class _BookEntryCardState extends State<BookEntryCard> {
                       ),
                     ]
                   ),
-                  Column(
+                ]
+              ),
+              const SizedBox(height: 4),
+              Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text("Last Chapter Read:",
-                        style: TextStyle(
+                      Text("Last Chapter Read: ${widget.bookEntry.lastChapterRead}",
+                        style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        widget.bookEntry.lastChapterRead.toString(),
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
                     ]
                   ),
-                ]
-              ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 4),
               const Text(
                 "Description:",
                 style: TextStyle(

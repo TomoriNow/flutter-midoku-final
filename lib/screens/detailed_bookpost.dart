@@ -54,12 +54,14 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                             style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
+                              color: Colors.black,
                             ),
                           ),
                           TextSpan(
                             text: "by ${bookPost.author}",
                             style: const TextStyle(
                               fontSize: 15,
+                              color: Colors.black,
                               // Add other styling properties for the author
                             ),
                           ),
@@ -70,13 +72,11 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                     Image.network(
                       bookPost.imagelink, 
                       width: 250, 
-                      height: 400, 
                       fit: BoxFit.contain, 
                       errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                         return Image.asset(
                           'assets/logos.png',
                           width: 200.0,
-                          height: 100.0,
                           fit: BoxFit.contain,
                         );
                       },

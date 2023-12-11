@@ -67,12 +67,14 @@ class _DetailEntryPageState extends State<DetailEntryPage> {
                           style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
                         ),
                         TextSpan(
                           text: "by ${book.author}",
                           style: const TextStyle(
                             fontSize: 15,
+                            color: Colors.black,
                             // Add other styling properties for the author
                           ),
                         ),
@@ -82,14 +84,12 @@ class _DetailEntryPageState extends State<DetailEntryPage> {
                   const SizedBox(height: 10),
                   Image.network(
                     book.imagelink, // Replace with your image URL
-                    width: 250, // Set the width of the image
-                    height: 400, // Set the height of the image
+                    width: 250, // Set the width of the image 
                     fit: BoxFit.contain, // BoxFit property to control how the image should be inscribed into the box
                     errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
                         return Image.asset(
                           'assets/logos.png',
                           width: 200.0,
-                          height: 100.0,
                           fit: BoxFit.contain,
                         );
                       },

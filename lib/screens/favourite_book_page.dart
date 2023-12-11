@@ -42,7 +42,19 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
         backgroundColor: Colors.redAccent,
         foregroundColor: Colors.white,
       ),
-      body: FutureBuilder(
+      body: AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue,
+              Colors.greenAccent,
+            ],
+          ),
+        ),
+        child: FutureBuilder(
         future: _bookEntry,
         builder: (context, AsyncSnapshot<BookEntry> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -50,7 +62,7 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
           } else if (snapshot.hasError) {
             var error = snapshot.error;
             print(error);
-            return Text('User has not picked a favorite book');
+            return const Center(child: Text('User has not picked a favorite book.'));
           } else if (!snapshot.hasData || snapshot.data == null) {
             return const Center(child: Text('You have no books in your collection.'));
           } else {
@@ -62,10 +74,13 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
             );
           }
         },
-      ),floatingActionButton: Row(
-  mainAxisAlignment: MainAxisAlignment.end,
-  crossAxisAlignment: CrossAxisAlignment.end,
-  children: [
+      ),
+      ),
+      
+      floatingActionButton: Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
   
         FloatingActionButton.extended(
         heroTag: "button1",

@@ -47,64 +47,78 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
-      body: FutureBuilder(
-        future: fetchItem(),
-        builder: (context, AsyncSnapshot<List<BookEntry>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {// Access the error information
-            var error = snapshot.error;
-            // Handle the error condition
-            return Text('Error: $error');
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('You have no books in your collection.'));
-          } else {
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                childAspectRatio: 0.7,
-              ),
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final bookEntry = snapshot.data![index];
-                return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      elevation: 10,
-      child: Stack(
-        children: [BookEntryCard(bookEntry: bookEntry),Positioned(
-            top: 8.0,
-            right: 8.0,
-            child: Row(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.info),
-                  onPressed: () async {
-                    // Handle icon button press
-                    final bool? shouldRefresh = await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ViewPage(bookEntry: bookEntry),
-                      ),
-                    );
-                    if (shouldRefresh != null && shouldRefresh) {
-                      // Refresh the card by calling setState
-                      setState(() {});
-                    }
-                  },
-                ), 
-              ]
-            )
+      body: AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue,
+              Colors.greenAccent,
+            ],
           ),
-        ],
+        ),
+        child: FutureBuilder(
+          future: fetchItem(),
+          builder: (context, AsyncSnapshot<List<BookEntry>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {// Access the error information
+              var error = snapshot.error;
+              // Handle the error condition
+              return Text('Error: $error');
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('You have no books in your collection.'));
+            } else {
+              return GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 0.7,
+                ),
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  final bookEntry = snapshot.data![index];
+                  return Card(
+        margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        elevation: 10,
+        child: Stack(
+          children: [BookEntryCard(bookEntry: bookEntry),Positioned(
+              top: 8.0,
+              right: 8.0,
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.info),
+                    onPressed: () async {
+                      // Handle icon button press
+                      final bool? shouldRefresh = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ViewPage(bookEntry: bookEntry),
+                        ),
+                      );
+                      if (shouldRefresh != null && shouldRefresh) {
+                        // Refresh the card by calling setState
+                        setState(() {});
+                      }
+                    },
+                  ), 
+                ]
+              )
+            ),
+          ],
+        ),
+                  );
+                },
+              );
+            }
+          },
+        ),
       ),
-                );
-              },
-            );
-          }
-        },
-      ),
+      
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Other_userPage()),);

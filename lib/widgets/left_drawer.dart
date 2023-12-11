@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:midoku/models/current_user.dart';
 import 'package:midoku/screens/add_bookpost.dart';
 import 'package:midoku/screens/add_tagpost.dart';
-
+import 'package:midoku/screens/other_users_admin.dart';
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key});
 
@@ -129,6 +129,20 @@ class LeftDrawer extends StatelessWidget {
                       );
                     },
                   ),
+                  if (currentUser.isStaff == true)
+                ListTile(
+                  leading: const Icon(Icons.supervisor_account),
+                  title: const Text('Other Users'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Other_userPageAdmin(),
+                      ),
+                    );
+                  },
+                ),
+                if (currentUser.isStaff != true)
                 ListTile(
                   leading: const Icon(Icons.supervisor_account),
                   title: const Text('Other Users'),

@@ -93,7 +93,7 @@ class _OtherUserCollectionPageState extends State<OtherUserCollectionPage> {
                       setState(() {});
                     }
                   },
-                ),
+                ), 
               ]
             )
           ),

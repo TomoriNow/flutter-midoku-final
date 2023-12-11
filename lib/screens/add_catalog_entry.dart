@@ -37,9 +37,7 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
           child: Row(
           children: [
             // Info side
@@ -132,203 +130,222 @@ class _AddCatalogPageState extends State<AddCatalogPage> {
                 ],
               ),
             ),
-            Expanded(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: DropdownButtonFormField<String>(
-                  value: _status,
-                  decoration: InputDecoration(
-                    hintText: "Status",
-                    labelText: "Status",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _status = value;
-                    });
-                  },
-                  items: statuses.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value[0],
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return "Entry status cannot be empty!";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Last Chapter Read",
-                    labelText: "Last Chapter Read",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _lastChapterRead = int.parse(value!);
-                    });
-                  },
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return "Last Chapter Read cannot be empty!";
-                    }
-                    if (int.tryParse(value) == null) {
-                      return "Last Chapter Read must be a number!";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Notes",
-                    labelText: "Notes",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _notes = value!;
-                    });
-                  },
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return "Notes cannot be empty!";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Review",
-                    labelText: "Review",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _review = value!;
-                    });
-                  },
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return "Review cannot be empty!";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: "Rating",
-                    labelText: "Rating",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      _rating = int.parse(value!);
-                    });
-                  },
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return "Rating cannot be empty!";
-                    }
-                    if (int.tryParse(value) == null) {
-                      return "Rating must be a number!";
-                    }
-                    if(int.parse(value) > 10 || int.parse(value) < 0) {
-                      return "Rating must be between 0 and 10";
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.indigo),
-                    ),
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        // Send request to Django and wait for the response
-                        final response = await request.postJson(
-                          "http://127.0.0.1:8000/create-catalog-flutter/",
-                          jsonEncode(<String, dynamic>{
-                            'id': widget.book.id,
-                            'status': _status,
-                            'lastChapterRead' : _lastChapterRead,
-                            'notes': _notes,
-                            'review': _review,
-                            'rating': _rating
-                          })
-                        );
-                        if (response['status'] == 'success') {
-                          ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(
-                            content: Text("New product has saved successfully!"),
-                          ));
-                          Navigator.pop(context);
-                        } else {
-                          ScaffoldMessenger.of(context)
-                          .showSnackBar(const SnackBar(
-                            content:
-                              Text("Something went wrong, please try again."),
-                          ));
-                        }
-                      }
-                    },
-                    child: const Text(
-                      "Save",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child:ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }, 
-                    child: const Text('Back'),
-                  )
-                )
-              ),
-            ]
-          )),
+            
           ]
         ),
       ),
+      floatingActionButton: 
+      FloatingActionButton.extended(
+        heroTag: "button1",
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                scrollable: true,
+                title: Text("Add ${widget.book.name}"),
+                content:  Form(
+                  key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: DropdownButtonFormField<String>(
+                            value: _status,
+                            decoration: InputDecoration(
+                              hintText: "Status",
+                              labelText: "Status",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                _status = value;
+                              });
+                            },
+                            items: statuses.map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value[0],
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return "Entry status cannot be empty!";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Last Chapter Read",
+                              labelText: "Last Chapter Read",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                _lastChapterRead = int.parse(value!);
+                              });
+                            },
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return "Last Chapter Read cannot be empty!";
+                              }
+                              if (int.tryParse(value) == null) {
+                                return "Last Chapter Read must be a number!";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Notes",
+                              labelText: "Notes",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                _notes = value!;
+                              });
+                            },
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return "Notes cannot be empty!";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Review",
+                              labelText: "Review",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                _review = value!;
+                              });
+                            },
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return "Review cannot be empty!";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Rating",
+                              labelText: "Rating",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(5.0),
+                              ),
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                _rating = int.parse(value!);
+                              });
+                            },
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return "Rating cannot be empty!";
+                              }
+                              if (int.tryParse(value) == null) {
+                                return "Rating must be a number!";
+                              }
+                              if(int.parse(value) > 10 || int.parse(value) < 0) {
+                                return "Rating must be between 0 and 10";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.indigo),
+                              ),
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  // Send request to Django and wait for the response
+                                  final response = await request.postJson(
+                                    "http://127.0.0.1:8000/create-catalog-flutter/",
+                                    jsonEncode(<String, dynamic>{
+                                      'id': widget.book.id,
+                                      'status': _status,
+                                      'lastChapterRead' : _lastChapterRead,
+                                      'notes': _notes,
+                                      'review': _review,
+                                      'rating': _rating
+                                    })
+                                  );
+                                  if (response['status'] == 'success') {
+                                    ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                      content: Text("New product has saved successfully!"),
+                                    ));
+                                    Navigator.pop(context);
+                                  } else {
+                                    ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                      content:
+                                        Text("Something went wrong, please try again."),
+                                    ));
+                                  }
+                                }
+                              },
+                              child: const Text(
+                                "Save",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child:ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              }, 
+                              child: const Text('Back'),
+                            )
+                          )
+                        ),
+                      ]
+                    ),
+                  ),
+                );
+            },
+          );
+        },
+        label: const Text('Add to collection'),
+        icon: const Icon(Icons.add),
       ),
     );
   }

@@ -17,7 +17,6 @@ class DetailedTagpostPage extends StatefulWidget {
 }
 
 class _DetailedTagpostPageState extends State<DetailedTagpostPage> {
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +30,43 @@ class _DetailedTagpostPageState extends State<DetailedTagpostPage> {
             'Detailed Tag Post Page',
           ),
         ),
-        backgroundColor: Colors.blueAccent, // Customize the color as needed
-        foregroundColor: Colors.white,
-      ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Container(
-            alignment: Alignment.center,
+            backgroundColor: Colors.blueAccent, // Customize the color as needed
+            foregroundColor: Colors.white,
+          ),
+          body: AnimatedContainer(
+            duration: const Duration(seconds: 1),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.blue,
+                  Colors.purple,
+                ],
+              ),
+            ),
+            child: Center(
             child: Card(
               elevation: 10.0,
-              margin: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 200),
+              shadowColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Container(
+              width: 300.0,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -87,11 +112,10 @@ class _DetailedTagpostPageState extends State<DetailedTagpostPage> {
                     ),
                   ],
                 ),
-              ),
+              ),),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

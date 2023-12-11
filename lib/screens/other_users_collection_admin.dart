@@ -76,8 +76,21 @@ class _OtherUserCollectionPageStateAdmin extends State<OtherUserCollectionPageAd
                 itemBuilder: (context, index) {
                   final bookEntry = snapshot.data![index];
                   return Card(
+                    surfaceTintColor: Colors.white,
                     margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     elevation: 10,
+                    child: Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(0.5), // Adjust the opacity as needed
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // You can adjust the offset to control the direction of the glow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                     child: Stack(
                       children: [
                         BookEntryCard(bookEntry: bookEntry),
@@ -126,7 +139,7 @@ class _OtherUserCollectionPageStateAdmin extends State<OtherUserCollectionPageAd
                         ),
                       ],
                     ),
-                  );
+                  ),);
                 },
               );
             }

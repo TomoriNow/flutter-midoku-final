@@ -15,7 +15,6 @@ class DetailBookpostPage extends StatefulWidget {
 }
 
 class _DetailBookpostPageState extends State<DetailBookpostPage> {
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,19 +28,45 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
             'Detailed Book Suggestion Page',
           ),
         ),
-        backgroundColor: Colors.amberAccent,
+        backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
-      body: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Container(
-            alignment: Alignment.center,
+      body: AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue,
+              Colors.purple,
+            ],
+          ),
+        ),
+        child: Center(
             child: Card(
               elevation: 10.0,
-              margin: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 30),
+              shadowColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Container(
+              width: 500.0,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,7 +154,7 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                         fontWeight: FontWeight.normal,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 30),
                     ElevatedButton(  
                       child: const Text('Accept Book'),
                       onPressed: () async {
@@ -155,10 +180,9 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                     ),
                   ],
                 ),
-              ),
+              ),),
             ),
           ),
-        ),
       ),
     );
   }

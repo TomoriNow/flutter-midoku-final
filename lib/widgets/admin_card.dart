@@ -20,7 +20,7 @@ class AdminCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    context.watch<CookieRequest>();
     return Material(
       color: item.color,
       child: InkWell(

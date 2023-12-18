@@ -15,7 +15,7 @@ class ManageBookpostsPage extends StatefulWidget {
 class _ManageBookpostsPageState extends State<ManageBookpostsPage> {
   Future<List<Bookpost>> fetchItem() async {
     final request = context.watch<CookieRequest>();
-    final response = await request.get('http://127.0.0.1:8000/bookpost-list/');
+    final response = await request.get('https://galihsopod.pythonanywhere.com/bookpost-list/');
 
     List<Bookpost> list_item = [];
     for (var d in response) {
@@ -28,7 +28,7 @@ class _ManageBookpostsPageState extends State<ManageBookpostsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(

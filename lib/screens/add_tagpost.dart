@@ -69,7 +69,7 @@ class _AddTagPostPageState extends State<AddTagPostPage> {
                       if (_formKey.currentState!.validate()) {
                         // Send request to Django and wait for the response
                         final response = await request.postJson(
-                          "http://127.0.0.1:8000/create-tagpost-flutter/",
+                          "https://galihsopod.pythonanywhere.com/create-tagpost-flutter/",
                           jsonEncode(<String, dynamic>{
                             'tag': _tagName,
                           })

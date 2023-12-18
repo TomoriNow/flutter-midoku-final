@@ -30,7 +30,7 @@ class _FilterBookPageState extends State<FilterBookPage> {
   Future<void> fetchBooks() async {
     final request = context.read<CookieRequest>();
     final response =
-        await request.get('http://127.0.0.1:8000/flutter-catalog/');
+        await request.get('https://galihsopod.pythonanywhere.com/flutter-catalog/');
 
     setState(() {
       list_item = []; // Clear existing data
@@ -46,7 +46,7 @@ class _FilterBookPageState extends State<FilterBookPage> {
 
   Future<List<String>> fetchData() async {
     final request = context.read<CookieRequest>();
-    var response = await request.get('http://127.0.0.1:8000/fetch-tags/');
+    var response = await request.get('https://galihsopod.pythonanywhere.com/fetch-tags/');
 
     List<String> list = [];
     for (var d in response) {

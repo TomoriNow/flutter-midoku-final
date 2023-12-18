@@ -15,7 +15,7 @@ class ManageUsersPage extends StatefulWidget {
 class _ManageUsersPageState extends State<ManageUsersPage> {
   Future<List<User>> fetchItem() async {
       final request = context.watch<CookieRequest>();
-      final response = await request.get('http://127.0.0.1:8000/other-users/');
+      final response = await request.get('https://galihsopod.pythonanywhere.com/other-users/');
 
       List<User> list_item = [];
       for (var d in response) {
@@ -27,7 +27,7 @@ class _ManageUsersPageState extends State<ManageUsersPage> {
   }
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(

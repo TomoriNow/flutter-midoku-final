@@ -20,7 +20,7 @@ class _CollectionPageState extends State<CollectionPage> {
   late Future<List<BookEntry>> _bookEntries;
   Future<List<BookEntry>> fetchItem() async {
     final request = Provider.of<CookieRequest>(context, listen: false);
-    var response = await request.get('http://127.0.0.1:8000/Galih/');
+    var response = await request.get('https://galihsopod.pythonanywhere.com/Galih/');
     List<BookEntry> listItem = [];
     for (var d in response) {
       if (d != null) {
@@ -121,8 +121,8 @@ class _CollectionPageState extends State<CollectionPage> {
                   onPressed: () async {
                     // Handle icon button press
                   final request = Provider.of<CookieRequest>(context, listen: false);
-                  final response = await request.postJson(
-                    "http://127.0.0.1:8000/favourite-entry-flutter-post/",
+                  await request.postJson(
+                    "https://galihsopod.pythonanywhere.com/favourite-entry-flutter-post/",
                     jsonEncode(<String, dynamic>{
                       'id': bookEntry.pk,
                       'username': widget.username
@@ -133,7 +133,7 @@ class _CollectionPageState extends State<CollectionPage> {
                 IconButton(onPressed: () async {
                   final request = Provider.of<CookieRequest>(context, listen: false);
                   final response = await request.postJson(
-                    "http://127.0.0.1:8000/delete-entry-flutter/",
+                    "https://galihsopod.pythonanywhere.com/delete-entry-flutter/",
                     jsonEncode(<String, dynamic>{
                       'id': bookEntry.pk,
                     })

@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midoku/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:midoku/models/user.dart';
-import 'package:midoku/screens/other_users_collection.dart';
 import 'package:midoku/screens/other_users_collection_admin.dart';
 class Other_userPageAdmin extends StatefulWidget {
   const Other_userPageAdmin({Key? key}) : super(key: key);
@@ -19,7 +17,7 @@ class _OtherUserPageStateAdmin extends State<Other_userPageAdmin> {
     final request = context.watch<CookieRequest>();
 
     Future<List<User>> fetchItem() async {
-      final response = await request.get('http://127.0.0.1:8000/other-users/');
+      final response = await request.get('https://galihsopod.pythonanywhere.com/other-users/');
       // convert the JSON to Item object
       List<User> list_item = [];
       for (var d in response) {

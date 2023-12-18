@@ -28,7 +28,7 @@ class _AddBookPostPageState extends State<AddBookPostPage> {
   Future<List<String>> fetchData() async {
     final request = context.watch<CookieRequest>();
     var response = await request.get(
-      'http://127.0.0.1:8000/fetch-tags/'
+      'https://galihsopod.pythonanywhere.com/fetch-tags/'
     );
     
     List<String> list = [];
@@ -240,7 +240,7 @@ class _AddBookPostPageState extends State<AddBookPostPage> {
                       if (_formKey.currentState!.validate()) {
                         // Send request to Django and wait for the response
                         final response = await request.postJson(
-                          "http://127.0.0.1:8000/create-bookpost-flutter/",
+                          "https://galihsopod.pythonanywhere.com/create-bookpost-flutter/",
                           jsonEncode(<String, dynamic>{
                             'name': _name,
                             'author': _author,

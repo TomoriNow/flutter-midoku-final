@@ -1,14 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:midoku/models/book.dart';
 import 'package:midoku/models/book_entry.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:midoku/screens/login.dart';
-import 'package:midoku/screens/add_to_collection_page.dart';
-import 'package:midoku/models/book_entry.dart';
 import 'package:midoku/widgets/book_entry_card.dart';
-import 'package:midoku/screens/other_users_admin.dart';
 class FavouriteBookPage extends StatefulWidget {
   final String username;
   const FavouriteBookPage({Key? key, required this.username}) : super(key: key);
@@ -23,7 +17,7 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
     final request = context.watch<CookieRequest>();
     var encodedUsername = Uri.encodeComponent(widget.username);
     print(widget.username);
-    var url = 'http://127.0.0.1:8000/favourite-entry-flutter-get/$encodedUsername/';
+    var url = 'https://galihsopod.pythonanywhere.com/favourite-entry-flutter-get/$encodedUsername/';
     var response = await request.get(url);
     return BookEntry.fromJson(response);
   }

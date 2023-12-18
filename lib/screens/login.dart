@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:midoku/screens/catalog.dart';
-import 'package:midoku/main.dart';
-import 'package:midoku/screens/test.dart';
 import 'package:midoku/screens/register.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:midoku/screens/collection.dart';
 
 void main() {
   runApp(const LoginApp());
@@ -112,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       String password = _passwordController.text;
 
                       final response = await request.login(
-                        "http://127.0.0.1:8000/auth/login/",
+                        "https://galihsopod.pythonanywhere.com/auth/login/",
                         {'username': username, 'password': password},
                       );
 

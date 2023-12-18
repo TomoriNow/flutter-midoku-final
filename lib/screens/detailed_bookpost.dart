@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:midoku/models/bookpost.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -158,8 +156,7 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                     ElevatedButton(  
                       child: const Text('Accept Book'),
                       onPressed: () async {
-                        print(Uri.encodeComponent(bookPost.id.toString()));
-                        final response = await request.post('http://127.0.0.1:8000/accept-book-flutter/${Uri.encodeComponent(bookPost.id.toString())}/', {"status": "success"});
+                        await request.post('https://galihsopod.pythonanywhere.com/accept-book-flutter/${Uri.encodeComponent(bookPost.id.toString())}/', {"status": "success"});
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => const ManageBookpostsPage()),
@@ -170,8 +167,7 @@ class _DetailBookpostPageState extends State<DetailBookpostPage> {
                     ElevatedButton(  
                       child: const Text('Reject Book'),  
                       onPressed: () async {
-                        print(Uri.encodeComponent(bookPost.id.toString()));
-                        final response = await request.post('http://127.0.0.1:8000/reject-book-flutter/${Uri.encodeComponent(bookPost.id.toString())}/', {"status": "success"});
+                        await request.post('https://galihsopod.pythonanywhere.com/reject-book-flutter/${Uri.encodeComponent(bookPost.id.toString())}/', {"status": "success"});
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => const ManageBookpostsPage()),

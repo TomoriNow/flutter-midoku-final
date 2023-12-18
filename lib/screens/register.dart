@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:midoku/screens/login.dart';
 import 'dart:convert';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:midoku/models/user.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -111,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       String password2 = _password2Controller.text;
 
                       final response = await request.postJson(
-                        "http://127.0.0.1:8000/auth/register/",
+                        "https://galihsopod.pythonanywhere.com/auth/register/",
                         jsonEncode(<String, String>{
                           'username': username,
                           'password1': password1,

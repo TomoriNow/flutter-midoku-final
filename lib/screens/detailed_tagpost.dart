@@ -1,6 +1,5 @@
 // detailed_tagpost.dart
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:midoku/models/tagpost.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -84,9 +83,8 @@ class _DetailedTagpostPageState extends State<DetailedTagpostPage> {
                     ElevatedButton(
                       child: const Text('Accept Tag'),
                       onPressed: () async {
-                        print(Uri.encodeComponent(tagPost.id.toString()));
-                        final response = await request.post(
-                            'http://127.0.0.1:8000/accept-tag-flutter/${Uri.encodeComponent(tagPost.id.toString())}/',
+                        await request.post(
+                            'https://galihsopod.pythonanywhere.com/accept-tag-flutter/${Uri.encodeComponent(tagPost.id.toString())}/',
                             {"status": "success"});
                         Navigator.pushReplacement(
                           context,
@@ -99,9 +97,8 @@ class _DetailedTagpostPageState extends State<DetailedTagpostPage> {
                     ElevatedButton(
                       child: const Text('Reject Tag'),
                       onPressed: () async {
-                        print(Uri.encodeComponent(tagPost.id.toString()));
-                        final response = await request.post(
-                            'http://127.0.0.1:8000/reject-tag-flutter/${Uri.encodeComponent(tagPost.id.toString())}/',
+                        await request.post(
+                            'https://galihsopod.pythonanywhere.com/reject-tag-flutter/${Uri.encodeComponent(tagPost.id.toString())}/',
                             {"status": "success"});
                         Navigator.pushReplacement(
                           context,

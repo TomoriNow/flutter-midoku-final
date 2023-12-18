@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:midoku/models/book.dart';
 import 'package:midoku/models/book_entry.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -285,7 +284,7 @@ class _DetailEntryPageState extends State<DetailEntryPage> {
                         widget.bookEntry.rating = int.parse(_ratingController.text);
                         // Send request to Django and wait for the response
                         final response = await request.postJson(
-                          "http://127.0.0.1:8000/edit-entry-flutter/",
+                          "https://galihsopod.pythonanywhere.com/edit-entry-flutter/",
                           jsonEncode(<String, dynamic>{
                             'id': widget.bookEntry.pk,
                             'status': _status,

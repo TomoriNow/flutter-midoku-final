@@ -1,10 +1,7 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:midoku/models/book.dart';
 import 'package:midoku/models/book_entry.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:midoku/screens/login.dart';
 import 'package:midoku/screens/add_to_collection_page.dart';
 class ViewPage extends StatefulWidget {
     final BookEntry bookEntry;
@@ -39,7 +36,7 @@ class _ViewPageState extends State<ViewPage> {
   Widget build(BuildContext context) {
     _status = widget.bookEntry.status;
     CustomEntry book = widget.bookEntry.customEntry ?? widget.bookEntry.catalogEntry!.book;
-    final request = context.watch<CookieRequest>();
+    context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -217,7 +214,7 @@ class _ViewPageState extends State<ViewPage> {
         child: ElevatedButton(
           onPressed: () async {
             // Handle icon button press
-            final bool? shouldRefresh = await Navigator.push(
+            await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => AddtoCollectionPage(bookEntry: book),

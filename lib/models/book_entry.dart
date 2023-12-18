@@ -4,9 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:midoku/screens/detailed_entry.dart';
-
 List<BookEntry> bookEntryFromJson(String str) => List<BookEntry>.from(json.decode(str).map((x) => BookEntry.fromJson(x)));
 
 String bookEntryToJson(List<BookEntry> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));

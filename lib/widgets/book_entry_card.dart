@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:midoku/models/book_entry.dart';
-import 'package:midoku/screens/detailed_entry.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +15,7 @@ class BookEntryCard extends StatefulWidget {
 class _BookEntryCardState extends State<BookEntryCard> {
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
+    context.watch<CookieRequest>();
     CustomEntry book = widget.bookEntry.customEntry ?? widget.bookEntry.catalogEntry!.book;
     String status;
     if (widget.bookEntry.status == "P") {status = "Plan to Read";}

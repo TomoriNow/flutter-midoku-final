@@ -20,7 +20,7 @@ class _OtherUserCollectionPageStateAdmin extends State<OtherUserCollectionPageAd
   Future<List<BookEntry>> fetchItem() async {
     final request = context.watch<CookieRequest>();
     var encodedUsername = Uri.encodeComponent(widget.username);
-    var url = 'http://127.0.0.1:8000/entry_flutter/$encodedUsername/';
+    var url = 'https://galihsopod.pythonanywhere.com/entry_flutter/$encodedUsername/';
     var response = await request.get(url);
     
     List<BookEntry> listItem = [];
@@ -117,7 +117,7 @@ class _OtherUserCollectionPageStateAdmin extends State<OtherUserCollectionPageAd
                                 onPressed: () async {
                                   final request = Provider.of<CookieRequest>(context, listen: false);
                                   final response = await request.postJson(
-                                    "http://127.0.0.1:8000/delete-entry-flutter/",
+                                    "https://galihsopod.pythonanywhere.com/delete-entry-flutter/",
                                     jsonEncode(<String, dynamic>{'id': bookEntry.pk}),
                                   );
                                   if (response['status'] == 'success') {

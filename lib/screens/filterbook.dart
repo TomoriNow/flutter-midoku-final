@@ -77,7 +77,19 @@ class _FilterBookPageState extends State<FilterBookPage> {
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
-      body: FutureBuilder(
+      body: AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue,
+              Colors.greenAccent,
+            ],
+          ),
+        ),
+        child: FutureBuilder(
         // Assuming you have a different future for fetching tags
         future: fetchData(),
         builder: (context, AsyncSnapshot<List<String>> tagsSnapshot) {
@@ -134,7 +146,7 @@ class _FilterBookPageState extends State<FilterBookPage> {
             );
           }
         },
-      ),
+      ),),
       floatingActionButton: Stack(
         children: [
           Positioned(

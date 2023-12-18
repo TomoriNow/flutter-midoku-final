@@ -69,7 +69,19 @@ class _FilterTypePageState extends State<FilterTypePage> {
         foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
-      body: Column(
+      body: AnimatedContainer(
+        duration: const Duration(seconds: 1),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue,
+              Colors.greenAccent,
+            ],
+          ),
+        ),
+        child: Column(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -107,7 +119,7 @@ class _FilterTypePageState extends State<FilterTypePage> {
             ),
           ),
         ],
-      ),
+      ),),
       floatingActionButton: Stack(
         children: [
           Positioned(

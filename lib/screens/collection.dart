@@ -79,6 +79,7 @@ class _CollectionPageState extends State<CollectionPage> {
               itemBuilder: (context, index) {
                 final bookEntry = snapshot.data![index];
                 return Card(
+      surfaceTintColor: Colors.white,
       margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
       elevation: 10,
       child:  Container(

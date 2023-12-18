@@ -1,3 +1,11 @@
+## Build Status Badge
+
+[![Build status](https://build.appcenter.ms/v0.1/apps/29bf0049-c823-4af6-9c16-a5e28fad8abc/branches/main/badge)](https://appcenter.ms)
+
+## App Link
+
+https://install.appcenter.ms/orgs/midoku-pbp-final-project/apps/midoku/distribution_groups/public
+
 ## Group Members
 __________________
 
@@ -114,4 +122,3 @@ https://docs.google.com/spreadsheets/d/1qj96wXAVZJGXg9jvsCb3iM_aPbRxxIprww1FheId
 ### Link to Meeting Minutes
 __________________
 https://docs.google.com/document/d/1imXNmesgl2c_y6nTBjoqEtfVuPo_Bwlwjfar6pO7UQ4/edit?usp=sharing
-

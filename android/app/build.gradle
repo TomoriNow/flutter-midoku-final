@@ -63,7 +63,7 @@ android {
         release {
             signingConfig signingConfigs.release
         }
-    }
+    } 
 }
 
 flutter {

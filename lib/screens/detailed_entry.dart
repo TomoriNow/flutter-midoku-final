@@ -170,6 +170,7 @@ class _DetailEntryPageState extends State<DetailEntryPage> {
                     setState(() {
                       _status = value;
                     });
+                    widget.bookEntry.status = value!;
                   },
                   items: statuses.map((String value) {
                     return DropdownMenuItem<String>(
@@ -282,12 +283,15 @@ class _DetailEntryPageState extends State<DetailEntryPage> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         widget.bookEntry.rating = int.parse(_ratingController.text);
+                        widget.bookEntry.review = _reviewController.text;
+                        widget.bookEntry.lastChapterRead = int.parse(_lastChapterController.text);
+                        widget.bookEntry.notes = _notesController.text;
                         // Send request to Django and wait for the response
                         final response = await request.postJson(
                           "https://galihsopod.pythonanywhere.com/edit-entry-flutter/",
                           jsonEncode(<String, dynamic>{
                             'id': widget.bookEntry.pk,
-                            'status': _status,
+                            'status': widget.bookEntry.status,
                             'lastChapterRead' : _lastChapterController.text,
                             'notes': _notesController.text,
                             'review': _reviewController.text,

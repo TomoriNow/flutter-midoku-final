@@ -18,7 +18,7 @@ __________________
 ## Link to the APK
 __________________
 
-Temporarily blank until stage 2 is done
+https://install.appcenter.ms/orgs/midoku-pbp-final-project/apps/midoku/distribution_groups/public
 
 ## Application description (name and function of the application).
 __________________
@@ -61,13 +61,13 @@ Pages and Important widgets to be implemented:
 **Catalog Page:** This is where all of the books in our catalogue will be shown and where the user is navigated to when they log in. Users can also view further details about any book on the catalogue by tapping on it, and also there will be an option when you click on the book you will add it to your personal collection in the collection page.
 
 
-**Collection Page:** Where the user can view all of the book entries that they have added from the catalogue or they made a custom entry for. Users can view further detail regarding any book entry (such as any notes that they have written down regarding the bok, their rating, their review etc.) by tapping on them. Users can also, set their favourite entry, edit entries and access the create custom entry page from here. 
+**Collection Page:** Where the user can view all of the book entries that they have added from the catalogue or they made a custom entry for. Users can view further detail regarding any book entry (such as any notes that they have written down regarding the book, their rating, their review etc.) by tapping on the i button of that specific entry. Users can also, set their favourite entry, edit entries, delete entries and access the create custom entry page from here. 
 
 
-**Add Catalog Entry Page:** Users may add entries from the catalog page, in which case they will be navigated to this page, which will display the information regarding the book (title, author, image, description) along with a few input fields to input information regarding the entry (last chapter read, rating, review, notes)
+**Add Catalog Entry Page:** Users may add entries from the catalog page by tapping on the plus icon button on a book from the catalog, in which case they will be navigated to this page, which will display the information regarding the book (title, author, image, description) along with a few input fields to input information regarding the entry (last chapter read, rating, review, notes). Once they've filled out all input fields with valid inputs, they can tap the 'Save' button which will save that book, along with all entry details to their own collection.
 
 
-**Add Custom Entry:** In this page users can add entries for books not found in the Catalogue page, here they have to fill out the details regarding the book (title, author, description, image link, tags) as well as the entry details (last chapter read, notes, review, rating). This data will be sent to the Django project, and if the data is valid then a BookEntry with that data will be created
+**Add Custom Entry:** In this page users can add entries for books not found in the Catalogue page, here they have to fill out the details regarding the book (title, author, description, image link, tags) as well as the entry details (last chapter read, notes, review, rating). This data will be sent to the Django project, and if the data is valid then a BookEntry with that data will be created. 
 
 
 **Other User Collection Page:** Similar to the collection page, but instead of showing the entries of the user that is logged in, it shows the collection of a different user. Users can only view the entries and add any entries they like from this other user’s collection to their own collection. They can’t edit entries nor set any entries as favourite, however admins (superusers and staff) may be able to delete entries if they deem that that entry is inappropriate (will mostly occur if users add an inappropriate custom entry).
@@ -88,13 +88,13 @@ Distribution of Work:
 * Muhammad Sean Arsha Galant: Catalogue Page, Admin Page(with Duden)
 
 
-* Galih Ibrahim Kurniawan: Book entries Page, Other User Collection Page, Add Catalog Entry Function, Add Custom Entry Function 
+* Galih Ibrahim Kurniawan: Collection Page, Add Catalog Entry Function, Add Custom Entry Function 
   
 
 * Alvin Zhafif Afilla: register & login
 
 
-* Gregorius Samuel Hutahean: User Display Page
+* Gregorius Samuel Hutahean: User Display Page, Other Users Collection Page. Favourite entry functionality
 
 
 * Muhammad Sakhran Thayyib / Duden: Search Page, Admin Page(with Sean)
@@ -107,11 +107,11 @@ Owner/Superuser - The Owner (or the Superuser) in our web application has the ab
 
 Admin - The Admin is capable of accepting or rejecting tag (such as adding tags) and book (such as adding books to the catalog) requests. However, the admin is not capable of adding more admins into the web application.
 
-User - The User is able to add books to their own list (which can be from the catalog or they can add all of the details of the book that they have read themselves), share their lists to other users, as well as add reviews and edit the last-read attribute to books in their list. They can also submit possible book tags or books for the catalog that the admins can accept or deny before adding them to the web application for other users to see publicly.
+User - The User is able to add books to their own list (which can be from the catalog or they can add all of the details of the book that they have read themselves (via the custom entry form)), view other user's collections, as well as edit and delete their own entries. They can also set their own favourite book. Users can also submit possible book tags or books for the catalog that the admins can accept or reject which if accepted will add that tag or book to the web application's catalog for other users to see on the catalog page.
 
 ### Integration flow with the web service to connect to the web application created during the Midterm Project.
 __________________
-We will be utilising the Provider and the pbp_django_auth packages to facilitate transfer of data between our flutter app(Final Project) with our Django project(Midterm Project). Specifically, we will use the CookieRequest.get method to fetch data from our Django database, the CookieRequest.post method for registration or to save instances of BookEntries, TagPosts, BookPosts, etc. to our Django database and the CookieRequest.login method for authentication (such as logging in and saving the current user)
+We will be utilising the Provider and the pbp_django_auth packages to facilitate transfer of data between our flutter app(Final Project) with our Django project(Midterm Project). Specifically, we will use the CookieRequest.get method to fetch data from our Django database, the CookieRequest.post method for registration or to save instances of BookEntries, TagPosts, BookPosts, etc. to our Django database and the CookieRequest.login method for authentication (such as logging in and saving the current user). The Midterm project has been deployed using python anywhere, thus we can make requests to our midterm project from our flutter app using the url https://galihsopod.pythonanywhere.com/ 
 
 
 ### Link to the report documents/sheets.

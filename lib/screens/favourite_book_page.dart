@@ -54,12 +54,7 @@ class _FavouriteBookPageState extends State<FavouriteBookPage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            var error = snapshot.error;
-            if (error.toString() == "Expected a value of type 'String', but got one of type 'Null'"){
-              return Center(child: Text("${widget.username} doesn't have a favourite book."));
-            }
-            print(error);
-            return Text('Error: $error');
+            return Center(child: Text("${widget.username} doesn't have a favourite book."));
           } else if (!snapshot.hasData || snapshot.data == null) {
             return Center(child: Text("${widget.username} doesn't have a favourite book."));
           } else {
